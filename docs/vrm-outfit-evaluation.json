@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "modelSha256": "4496063f39acd003a324c6a4c511b05d3bb0d06bf1ad04df0221ba59a1f4fda1",
+  "modelVersion": "4.86.0",
+  "generatedAt": "2026-09-30T09:08:05.705Z",
+  "runtimeSources": {
+    "public/avatar-outfits.mjs": "88bf497082e2939edc1d7d8382e352979abd30b7242e873daacb72065073803b",
+    "browser/avatar-vrm/outfits.mjs": "545099037ed3f3ddeb5611df99d1b5972f3f66098e39394e6848172d0d4ba179"
+  },
+  "method": "Actual shipped GLB accessors, original node hierarchy, skin inverse matrices and morphs extracted into Three BufferGeometry, Skeleton, SkinnedMesh and MToonMaterial; production NoaOutfitController. MToon outline clones use the production loader naming convention. No substitute geometry or mocked methods.",
+  "switches": 300,
+  "outfits": [
+    "signal-hoodie",
+    "midnight-hoodie",
+    "studio-jacket"
+  ],
+  "meshes": 81,
+  "materialInstances": 120,
+  "geometryAccessorCount": 1017,
+  "checks": [
+    "300 switches including exact restoration",
+    "outline clone colors and shade ratios",
+    "all non-garment materials unchanged",
+    "all node transforms, skin bindings and morph values unchanged",
+    "all actual geometry/index/morph buffers bitwise unchanged",
+    "only 14 hood nodes hidden for studio-jacket",
+    "unknown outfit rejected without mutation",
+    "idempotent dispose restores originals"
+  ],
+  "limitations": [
+    "Textures are not decoded and WebGL is not initialized.",
+    "This tests the controller against extracted real assets, not the entire browser GLTF loader.",
+    "No browser UI, OBS, speech synchronization or animated garment clearance evaluation."
+  ]
+}

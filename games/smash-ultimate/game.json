@@ -1,0 +1,17 @@
+{
+  "id": "smash-ultimate",
+  "title": "スマブラSP",
+  "show": "show.mjs",
+  "player": "operator",
+  "about": "大乱闘スマッシュブラザーズ SPECIAL on Nintendo Switch. A person plays at the controls; Noa commentates on what the operator reports from the Studio (match start, KOs, result). No controller process: nothing is launched.",
+  "capture": {
+    "kind": "switch",
+    "cropTopPx": 0,
+    "audioVolumeDb": -10
+  },
+  "stage": {
+    "about": "HUD (measured 2026-10-19 on Nintendo's official play video, 2-fighter matches): damage and portraits at y 0.80-0.96 (box from 0.78, full width for 3-4 fighters), the timer at x 0.86-0.98 y 0.03-0.08, the score (spirit battles) at x 0.39-0.61 y 0.01-0.06; layout wide (operator 2026-10-19, 没入型): the game at 1600x900 and every overlay outside the picture",
+    "layout": "wide",
+    "hud": [[0, 0.78, 1, 0.22], [0.78, 0, 0.22, 0.12], [0.36, 0, 0.28, 0.09]]
+  }
+}

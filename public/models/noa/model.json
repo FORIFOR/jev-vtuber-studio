@@ -1,0 +1,288 @@
+{
+ "name": "Noa",
+ "canvas": [
+  1200,
+  1600
+ ],
+ "source": "Noa_Live2D_Prototype v0.1 Source/layers (images only), repaired by scripts/build-noa-layers.py | Body replaced 2026-10-03 from 透明背景の猫パッチ付き白ジャケット衣装トルソー.png (scaled 1.12, neck top at 700,700)",
+ "layers": [
+  {
+   "name": "Body",
+   "file": "Body.png",
+   "kind": "body",
+   "x": 260,
+   "y": 697,
+   "w": 877,
+   "h": 903,
+   "opacity": 1
+  },
+  {
+   "name": "HeadBase",
+   "file": "HeadBase.png",
+   "kind": "head",
+   "x": 245,
+   "y": 72,
+   "w": 828,
+   "h": 795,
+   "opacity": 1
+  },
+  {
+   "name": "Face",
+   "file": "Face.png",
+   "kind": "face",
+   "x": 509,
+   "y": 285,
+   "w": 414,
+   "h": 465,
+   "opacity": 1
+  },
+  {
+   "name": "EyeWhiteL",
+   "file": "EyeWhiteL.png",
+   "kind": "eyeWhite",
+   "x": 533,
+   "y": 478,
+   "w": 112,
+   "h": 77,
+   "opacity": 1,
+   "side": "L",
+   "pivot": [
+    605,
+    522
+   ]
+  },
+  {
+   "name": "EyeIrisL",
+   "file": "EyeIrisL.png",
+   "kind": "iris",
+   "x": 573,
+   "y": 482,
+   "w": 65,
+   "h": 73,
+   "opacity": 1,
+   "side": "L",
+   "pivot": [
+    605,
+    522
+   ]
+  },
+  {
+   "name": "EyeLashL",
+   "file": "EyeLashL.png",
+   "kind": "lash",
+   "x": 519,
+   "y": 464,
+   "w": 132,
+   "h": 44,
+   "opacity": 1,
+   "side": "L",
+   "pivot": [
+    605,
+    522
+   ]
+  },
+  {
+   "name": "EyeClosedL",
+   "file": "EyeClosedL.png",
+   "kind": "closedEye",
+   "x": 539,
+   "y": 513,
+   "w": 118,
+   "h": 23,
+   "opacity": 0,
+   "side": "L",
+   "pivot": [
+    605,
+    522
+   ]
+  },
+  {
+   "name": "EyeWhiteR",
+   "file": "EyeWhiteR.png",
+   "kind": "eyeWhite",
+   "x": 766,
+   "y": 492,
+   "w": 116,
+   "h": 80,
+   "opacity": 1,
+   "side": "R",
+   "pivot": [
+    820,
+    532
+   ]
+  },
+  {
+   "name": "EyeIrisR",
+   "file": "EyeIrisR.png",
+   "kind": "iris",
+   "x": 787,
+   "y": 492,
+   "w": 67,
+   "h": 80,
+   "opacity": 1,
+   "side": "R",
+   "pivot": [
+    820,
+    532
+   ]
+  },
+  {
+   "name": "EyeLashR",
+   "file": "EyeLashR.png",
+   "kind": "lash",
+   "x": 761,
+   "y": 479,
+   "w": 134,
+   "h": 52,
+   "opacity": 1,
+   "side": "R",
+   "pivot": [
+    820,
+    532
+   ]
+  },
+  {
+   "name": "EyeClosedR",
+   "file": "EyeClosedR.png",
+   "kind": "closedEye",
+   "x": 754,
+   "y": 523,
+   "w": 118,
+   "h": 23,
+   "opacity": 0,
+   "side": "R",
+   "pivot": [
+    820,
+    532
+   ]
+  },
+  {
+   "name": "BrowL",
+   "file": "BrowL.png",
+   "kind": "brow",
+   "x": 531,
+   "y": 383,
+   "w": 120,
+   "h": 35,
+   "opacity": 1,
+   "side": "L",
+   "pivot": [
+    590,
+    400
+   ]
+  },
+  {
+   "name": "BrowR",
+   "file": "BrowR.png",
+   "kind": "brow",
+   "x": 736,
+   "y": 396,
+   "w": 118,
+   "h": 49,
+   "opacity": 1,
+   "side": "R",
+   "pivot": [
+    794,
+    417
+   ]
+  },
+  {
+   "name": "Blush",
+   "file": "Blush.png",
+   "kind": "blush",
+   "x": 514,
+   "y": 533,
+   "w": 397,
+   "h": 95,
+   "opacity": 0
+  },
+  {
+   "name": "MouthOpen",
+   "file": "MouthOpen.png",
+   "kind": "mouthOpen",
+   "x": 645,
+   "y": 617,
+   "w": 117,
+   "h": 76,
+   "opacity": 0,
+   "pivot": [
+    704,
+    650
+   ]
+  },
+  {
+   "name": "MouthClosed",
+   "file": "MouthClosed.png",
+   "kind": "mouthClosed",
+   "x": 668,
+   "y": 633,
+   "w": 73,
+   "h": 13,
+   "opacity": 1,
+   "pivot": [
+    704,
+    638
+   ]
+  },
+  {
+   "name": "MouthO",
+   "file": "MouthO.png",
+   "kind": "mouthO",
+   "x": 679,
+   "y": 633,
+   "w": 49,
+   "h": 46,
+   "opacity": 0,
+   "pivot": [
+    704,
+    650
+   ]
+  },
+  {
+   "name": "MouthWave",
+   "file": "MouthWave.png",
+   "kind": "mouthWave",
+   "x": 668,
+   "y": 638,
+   "w": 73,
+   "h": 10,
+   "opacity": 0,
+   "pivot": [
+    704,
+    638
+   ]
+  },
+  {
+   "name": "HairSideL",
+   "file": "HairSideL.png",
+   "kind": "hair",
+   "x": 397,
+   "y": 400,
+   "w": 155,
+   "h": 319,
+   "opacity": 1,
+   "side": "L"
+  },
+  {
+   "name": "HairSideR",
+   "file": "HairSideR.png",
+   "kind": "hair",
+   "x": 855,
+   "y": 389,
+   "w": 124,
+   "h": 294,
+   "opacity": 1,
+   "side": "R"
+  },
+  {
+   "name": "Microphone",
+   "file": "Microphone.png",
+   "kind": "head",
+   "x": 790,
+   "y": 661,
+   "w": 131,
+   "h": 44,
+   "opacity": 1
+  }
+ ]
+}

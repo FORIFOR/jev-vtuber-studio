@@ -1,0 +1,516 @@
+:root{font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;background:#0e1422;color:#f3f1ea}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{display:flex;align-items:center;justify-content:center}
+#canvas{width:1920px;height:1080px;flex-shrink:0;position:relative;overflow:hidden;transform-origin:center;background:#1a2236}
+/* A night room: the character lives somewhere. No UI here, only atmosphere. */
+.backdrop .room{position:absolute;inset:0;background:radial-gradient(1100px 700px at 30% 88%,#ffcf8a22,transparent 60%),linear-gradient(180deg,#1b2338 0%,#222c46 62%,#2b2a38 100%)}
+.backdrop .window{position:absolute;left:1130px;top:90px;width:560px;height:520px;border-radius:14px;overflow:hidden;box-shadow:0 0 0 14px #2d3752,0 30px 60px #0008}
+.backdrop .sky{position:absolute;inset:0;background:linear-gradient(180deg,#0b1430,#1d3163 70%,#39507f)}.backdrop .sky i{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff6d6;box-shadow:0 0 8px #fff6d6;animation:twinkle 3.2s ease-in-out infinite}
+.backdrop .moon{position:absolute;right:70px;top:60px;width:90px;height:90px;border-radius:50%;background:#fff3cf;box-shadow:0 0 40px 10px #fff3cf55;overflow:hidden}.backdrop .moon::after{content:'';position:absolute;left:24px;top:-8px;width:90px;height:90px;border-radius:50%;background:#15234a}
+.backdrop .frame{position:absolute;inset:0;background:linear-gradient(90deg,transparent calc(50% - 5px),#2d3752 calc(50% - 5px),#2d3752 calc(50% + 5px),transparent calc(50% + 5px)),linear-gradient(180deg,transparent calc(55% - 5px),#2d3752 calc(55% - 5px),#2d3752 calc(55% + 5px),transparent calc(55% + 5px))}
+.backdrop .shelf{position:absolute;left:170px;top:210px;width:360px;height:14px;background:#3a3446;border-radius:3px;box-shadow:0 8px 16px #0006}.backdrop .shelf b{position:absolute;bottom:14px;width:34px;border-radius:3px 3px 0 0}.backdrop .shelf b:nth-child(1){left:20px;height:92px;background:#6b4f73}.backdrop .shelf b:nth-child(2){left:58px;height:78px;background:#3f6b73}.backdrop .shelf b:nth-child(3){left:96px;height:100px;background:#8a6a4a}.backdrop .shelf b:nth-child(4){left:250px;width:60px;height:60px;border-radius:50% 50% 8px 8px;background:#4f7a5c}
+.backdrop .lamp{position:absolute;left:210px;top:640px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,#ffd9a0aa,#ffb96b33 45%,transparent 70%);filter:blur(6px)}
+.backdrop .desk{position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(180deg,#3a3040,#2a2330);box-shadow:0 -6px 30px #0007}
+@keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+
+/* Talk: the character is the picture. */
+.avatar{position:absolute;width:720px;left:600px;top:110px;z-index:2;transform-origin:50% 38%;transition:transform .45s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 30px 40px #0009)}.avatar.zoom{transform:scale(1.08) translateY(20px)}
+#character{display:block;width:100%;overflow:visible}
+/* Subtitles are a light line near the character, not the main element. */
+.caption-box{position:absolute;left:96px;right:96px;transform:none;bottom:64px;max-width:none;padding:24px 40px;background:#0b1120d9;border:1px solid #ffffff1f;border-radius:22px;z-index:6;backdrop-filter:blur(8px);display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 24px 50px #0007}
+#caption{font-size:42px;line-height:1.5;letter-spacing:.5px;margin:0;font-weight:600;text-align:left;text-wrap:pretty;overflow-wrap:anywhere;color:#fffaf0;text-shadow:0 2px 6px #000a}#sources{display:flex;justify-content:flex-start;gap:18px;margin-top:4px}#sources:empty{display:none}#sources a{font-size:12px;color:#b9c6e0;text-decoration:none}
+.caption-name{display:none;font-size:16px;letter-spacing:3px;color:#9fe0c8;margin-bottom:4px}#canvas[data-speaker="comment"] .caption-name{display:block}#canvas[data-speaker="comment"] #caption{color:#d9e2f5;font-weight:450;font-size:34px}
+/* A picked comment only, for a few seconds, next to where the character looks. */
+.picked{position:absolute;left:96px;top:330px;width:560px;padding:24px 30px;border-radius:22px;background:#f3eccf;color:#1d2522;z-index:5;opacity:0;transform:translateY(12px) scale(.96);transition:opacity .3s,transform .3s cubic-bezier(.2,.9,.3,1.3);pointer-events:none;box-shadow:0 14px 30px #0008}.picked.show{opacity:1;transform:none}.picked small{display:block;font:600 16px ui-monospace,Menlo,monospace;letter-spacing:3px;color:#6b6450;margin-bottom:8px}.picked p{margin:0;font-size:32px;line-height:1.5;overflow-wrap:anywhere;max-height:170px;overflow:hidden;font-weight:600}
+.credit{position:absolute;right:40px;bottom:20px;font-size:14px;letter-spacing:1px;color:#8e98b3;z-index:7}
+.effect{position:absolute;top:150px;left:1180px;font-size:74px;letter-spacing:5px;color:#ffe39a;text-shadow:0 0 18px #ffcf6a88;z-index:5;pointer-events:none}.effect.active{animation:emphasis 1.5s both}
+.audio-controls{position:absolute;top:36px;right:40px;z-index:9;display:flex;align-items:center;gap:10px}.audio-controls button{border:1px solid #8fa0c8;background:#1d2740d9;border-radius:8px;padding:11px 17px;color:#e6ecff;font:14px system-ui;cursor:pointer}.audio-controls span{font-size:11px;color:#b9c6e0}.audio-controls.active button,.audio-controls.active span{opacity:0}.audio-controls.active:hover button{opacity:1}body.preview .audio-controls.active button{opacity:.5}
+
+/* Game: the game fills the screen; the character sits in the same scene, over its corner. */
+.game-panel{position:absolute;left:40px;top:40px;width:1300px;height:1000px;padding:28px;border-radius:22px;background:#0d1426ee;border:1px solid #ffffff14;z-index:3;box-shadow:0 20px 50px #000a;display:flex;flex-direction:column}.game-top{display:flex;justify-content:space-between;align-items:center;font-size:16px;letter-spacing:3px;margin-bottom:14px;color:#9fb0d6}.game-top strong{color:#ffe39a;font-weight:600;font-size:30px}
+.grid{flex:1;align-self:center;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));grid-template-rows:repeat(9,minmax(0,1fr));gap:6px;aspect-ratio:1;background:#16203a;border:1px solid #ffffff12;padding:10px;border-radius:14px}.cell{min-height:0;line-height:1;border-radius:6px;background:#1f2b4a;display:flex;justify-content:center;align-items:center;font-size:52px;color:#ffe39a;transition:background .2s}.cell.block{background:#3a4a72;box-shadow:inset 0 -6px 0 #2b3858}.cell.player{background:#5fd0b0;color:#0d1426;box-shadow:0 0 22px #5fd0b099}.cell.target{background:#2a2f4a;color:#ffe39a;text-shadow:0 0 18px #ffd86a;animation:twinkle 1.6s ease-in-out infinite}.game-panel.paused{opacity:.72;filter:saturate(.6)}.game-panel[hidden]{display:none}
+#canvas.has-game .backdrop .window{left:1370px;top:60px;width:500px;height:340px}#canvas.has-game .backdrop .shelf,#canvas.has-game .backdrop .lamp{display:none}
+#canvas.has-game .avatar{width:600px;left:1250px;top:330px}
+#canvas.has-game .picked{left:1380px;top:90px;width:470px}#canvas.has-game .picked p{font-size:25px}
+#canvas.has-game .caption-box{left:auto;right:500px;transform:none;bottom:60px;max-width:820px}#canvas.has-game #caption{font-size:28px}
+#canvas.has-game .effect{left:1380px;top:280px}
+.external #character,.external #png-avatar{display:none}#png-avatar{width:100%;max-height:750px;object-fit:contain;object-position:bottom}.png #character{display:none}#noa-layers{display:block;width:100%;height:auto}#noa-layers[hidden]{display:none}body.layers #character{display:none}.external #noa-layers{display:none}
+#canvas.emergency .caption-box{border-color:#b7554c}#canvas.emergency .avatar{opacity:.5}
+@keyframes emphasis{0%{opacity:0;transform:translateY(10px) scale(.95)}16%,72%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-12px)}}
+@media(prefers-reduced-motion:reduce){.effect.active{animation:none;opacity:1}.avatar,.picked{transition:none}.avatar.zoom{transform:none}}
+
+/* Optional separate 1080x1920 source; this does NOT enable YouTube dual streaming. */
+body.vertical #canvas{width:1080px;height:1920px}body.vertical .backdrop .window{left:560px;top:120px;width:440px;height:420px}body.vertical .backdrop .shelf{left:80px;top:300px}body.vertical .backdrop .lamp{left:90px;top:1300px}body.vertical .avatar{width:900px;left:90px;top:520px}body.vertical .picked{left:70px;top:420px;width:620px}body.vertical .caption-box{bottom:190px;max-width:960px}body.vertical .effect{left:700px;top:520px}
+body.vertical #canvas.has-game .game-panel{left:40px;top:40px;width:1000px;height:1000px}body.vertical #canvas.has-game .avatar{width:620px;left:440px;top:1120px}body.vertical #canvas.has-game .backdrop .window{display:none}body.vertical #canvas.has-game .picked{left:50px;top:1110px;width:460px}body.vertical #canvas.has-game .caption-box{right:auto;left:50%;transform:translateX(-50%);bottom:120px;max-width:980px}
+
+/* NOA BLOCKS: game on the left, Noa at her desk on the right, real numbers only. */
+.blocks-top{position:absolute;left:0;right:0;top:18px;text-align:center;z-index:6}.blocks-top h1{margin:0;font-size:52px;letter-spacing:4px;color:#ffe7b0;text-shadow:0 0 18px #ffcf6a66;font-weight:700}.blocks-top p{margin:6px 0 0;font-size:20px;letter-spacing:3px;color:#c9d4f0}
+.blocks-panel{position:absolute;left:36px;top:130px;width:760px;height:760px;display:grid;grid-template-columns:200px 380px 130px;gap:22px;padding:22px 24px;border-radius:22px;background:#0b1224e8;border:1px solid #7fa7ff33;box-shadow:0 0 40px #4f7bff22,0 20px 50px #000a;z-index:3}
+.blocks-logo{font-size:40px;font-weight:800;letter-spacing:1px;color:#f3f6ff;line-height:1}.blocks-logo small{display:block;font-size:22px;font-style:italic;font-weight:400;color:#c9d4f0;margin-top:6px}
+.blocks-hero{margin:30px 0 0;padding:16px 0 18px;border-top:1px solid #ffffff1a;border-bottom:1px solid #ffffff1a}.blocks-hero span{font-size:16px;letter-spacing:3px;color:#8fa0c8}.blocks-hero strong{display:block;font-size:64px;line-height:1.1;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}.blocks-hero strong.low{color:#ffb86a}.blocks-hero p{margin:8px 0 0;font-size:21px;font-weight:700;line-height:1.35;color:#ffe39a}.blocks-stats{margin:14px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:2px 12px}.blocks-stats dt{font-size:12px;letter-spacing:2px;color:#8fa0c8;margin-top:10px;grid-row:auto}.blocks-stats dd{margin:0;font-size:24px;font-weight:700;color:#dfe6ff;font-variant-numeric:tabular-nums}
+.blocks-field{position:relative;width:380px;height:716px;border-radius:10px;background:#060b18;border:1px solid #7fa7ff44;overflow:hidden}
+.blocks-board,.blocks-mirror{position:absolute;left:10px;top:-2px;width:360px;height:720px}.blocks-mirror{display:none}
+body.blocks-viewer .blocks-board{visibility:hidden}body.blocks-viewer .blocks-mirror{display:block}
+.blocks-board .blockrain-start-holder,.blocks-board .blockrain-game-over-holder,.blocks-board .blockrain-score-holder,.blocks-board .blockrain-touch{display:none!important}
+.blocks-banner{position:absolute;inset:auto 16px 45% 16px;padding:18px;border-radius:14px;background:#0b1224ee;border:1px solid #ffe39a66;color:#ffe7b0;font-size:30px;font-weight:700;text-align:center;line-height:1.4}
+.blocks-next{border-radius:12px;background:#0f1830;border:1px solid #7fa7ff33;padding:12px;height:150px;text-align:center}.blocks-next b{display:block;font-size:16px;letter-spacing:3px;color:#c9d4f0;margin-bottom:10px}
+.blocks-bottom{position:absolute;left:36px;bottom:24px;width:760px;height:130px;display:grid;grid-template-columns:1fr;z-index:6}
+.blocks-bottom>div{border-radius:16px;background:#0b1224e0;border:1px solid #7fa7ff2a;padding:14px 22px}.blocks-bottom b{font-size:16px;letter-spacing:3px;color:#8fd0ff}
+.blocks-bottom ul,.blocks-bottom ol{list-style:none;margin:8px 0 0;padding:0;font-size:21px;line-height:1.6;color:#eef2ff}.blocks-bottom li.done::before{content:'☑ ';color:#8fd0ff}.blocks-bottom li.todo::before{content:'☐ ';color:#8fa0c8}
+.blocks-bottom ol li{display:grid;grid-template-columns:80px 1fr auto;gap:12px;font-variant-numeric:tabular-nums}.blocks-bottom ol li span:last-child{color:#ffe39a}.blocks-bottom li.empty{display:block;color:#8fa0c8;font-size:18px}
+#canvas.blocks-mode .game-panel{display:none!important}
+#canvas.blocks-mode .backdrop .window{left:1060px;top:170px;width:480px;height:380px}#canvas.blocks-mode .backdrop .shelf{left:1560px;top:250px;width:300px}#canvas.blocks-mode .backdrop .lamp{left:1700px;top:560px}
+#canvas.blocks-mode .avatar{width:760px;left:960px;top:230px}
+.desk-front{position:absolute;left:820px;right:0;bottom:0;height:290px;z-index:4;background:linear-gradient(180deg,#3b3140,#2a2330);border-top:2px solid #54485a;box-shadow:0 -10px 30px #0008}
+.desk-front .keyboard{position:absolute;left:240px;top:18px;width:440px;height:44px;border-radius:8px;background:repeating-linear-gradient(90deg,#20263a 0 26px,#2c3450 26px 30px);box-shadow:0 4px 0 #151a28}
+.desk-front .mug{position:absolute;right:230px;top:-70px;width:130px;height:150px;border-radius:10px 10px 22px 22px;background:#f4f1ea;box-shadow:inset -10px 0 0 #ddd8cf}.desk-front .mug::after{content:'';position:absolute;right:-34px;top:34px;width:40px;height:56px;border:10px solid #f4f1ea;border-left:0;border-radius:0 30px 30px 0}.desk-front .mug span{position:absolute;left:10px;right:10px;top:48px;font-size:14px;line-height:1.4;color:#5a5566;text-align:center}
+#canvas.blocks-mode .picked{left:auto;right:36px;top:130px;width:430px}
+#canvas.blocks-mode .caption-box{left:830px;right:auto;transform:none;bottom:310px;max-width:340px;border-radius:26px;background:#0b1120cc;padding:14px 26px}#canvas.blocks-mode #caption{font-size:27px;text-align:left}
+#canvas.blocks-mode .effect{left:1500px;top:250px}
+body.layers .avatar{width:600px;left:660px;top:150px}
+.blocks-toast{position:absolute;left:16px;right:16px;top:18px;padding:12px 16px;border-radius:12px;background:#10204aee;border:1px solid #8fd0ff66;color:#eaf6ff;font-size:26px;font-weight:800;text-align:center;animation:toast 3s ease forwards}.blocks-toast.warn{border-color:#ffb86a88;color:#ffe3c2;background:#3a2410ee}@keyframes toast{0%{opacity:0;transform:translateY(-8px)}10%,80%{opacity:1;transform:none}100%{opacity:0}}
+body.layers #canvas.blocks-mode .avatar{width:700px;left:1085px;top:222px}
+body.room-art #canvas{background:center/cover no-repeat var(--room-art)}body.room-art .backdrop .room,body.room-art .backdrop .window,body.room-art .backdrop .shelf,body.room-art .backdrop .lamp{display:none}
+#canvas.blocks-mode .backdrop::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 900px 600px at 1800px 700px,#ffc47a1f,transparent 70%),radial-gradient(ellipse 1400px 900px at 50% 45%,transparent 55%,#02040b99 100%)}
+@media(prefers-reduced-motion:reduce){.blocks-toast{animation:none}}
+.caption-box{transition:opacity .5s ease}.caption-box.faded{opacity:0}@media(prefers-reduced-motion:reduce){.caption-box{transition:none}}
+.desk-art{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}.desk-art[hidden]{display:none}body.desk-art .desk-front{display:none!important}
+.fx-layer{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}.fx{position:absolute;pointer-events:none}
+.fx.telop{font-weight:900;letter-spacing:2px;white-space:nowrap;text-align:right;animation:telop-in var(--fx-ms,1500ms) ease both}
+.telop-joy{color:#d9ffb8;text-shadow:0 0 14px #8dff9a66,0 3px 0 #1b3a2a}.telop-surprise{color:#ffd0a0;text-shadow:0 0 16px #ff8a4a88,0 3px 0 #3a1a0a;animation-name:telop-pop!important}
+.telop-shy{color:#ffd6e6;font-weight:700;text-shadow:0 0 12px #ff9ac066}.telop-trouble{color:#c9d6f0;font-weight:700;text-shadow:0 2px 0 #1a2238}.telop-laugh{color:#fff1b8;text-shadow:0 0 12px #ffd86a66;animation-name:telop-bob!important}
+@keyframes telop-in{0%{opacity:0;transform:translateY(10px) scale(.92)}12%{opacity:1;transform:translateY(-4px) scale(1.04)}20%,80%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes telop-pop{0%{opacity:0;transform:scale(1.35)}10%{opacity:1;transform:scale(.96)}16%,82%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes telop-bob{0%{opacity:0}10%,85%{opacity:1}25%{transform:translateY(-6px)}40%{transform:none}55%{transform:translateY(-5px)}70%{transform:none}100%{opacity:0}}
+.fx.sparkle{color:#fff3c4;text-shadow:0 0 12px #ffe39a;transform:translate(-50%,-50%);animation:twinkle-fx var(--fx-ms,1600ms) ease both}
+@keyframes twinkle-fx{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}60%{opacity:.9;transform:translate(-50%,-60%) scale(.9)}100%{opacity:0;transform:translate(-50%,-80%) scale(.6)}}
+.fx.speedlines{border-radius:50%;background:repeating-conic-gradient(from 0deg,#ffffff00 0deg 5deg,#ffffffcc 5deg 6deg);-webkit-mask:radial-gradient(circle,transparent 36%,#000 48%,transparent 70%);mask:radial-gradient(circle,transparent 36%,#000 48%,transparent 70%);animation:lines-fx var(--fx-ms,1100ms) ease-out both}
+@keyframes lines-fx{0%{opacity:0;transform:scale(1.15)}15%{opacity:.7}100%{opacity:0;transform:scale(.95)}}
+.fx.glow{border-radius:50%;background:radial-gradient(circle,#ffc7a0cc,#ff9ac000 70%);animation:glow-fx var(--fx-ms,1800ms) ease both}
+@keyframes glow-fx{0%{opacity:0;transform:translateY(10px)}30%{opacity:.9}100%{opacity:0;transform:translateY(-70px)}}
+.fx.sweat{border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(160deg,#e8f6ff,#8fc8ff);box-shadow:0 0 8px #bfe3ff99;animation:sweat-fx var(--fx-ms,1500ms) ease-in both}
+@keyframes sweat-fx{0%{opacity:0;transform:translateY(-6px)}20%{opacity:1}100%{opacity:0;transform:translateY(28px)}}
+.fx.gloom{width:4px;border-radius:2px;background:#9fb0d8aa;animation:gloom-fx var(--fx-ms,1500ms) ease both}
+@keyframes gloom-fx{0%{opacity:0;transform:scaleY(.2)}25%,75%{opacity:1;transform:none}100%{opacity:0}}
+.fx.bounce{color:#fff1b8;font-weight:900;animation:bounce-fx calc(var(--fx-ms,1400ms)/3) ease-in-out 3 both}
+@keyframes bounce-fx{0%,100%{opacity:.2;transform:translateY(0)}50%{opacity:1;transform:translateY(-12px)}}
+.fx.board-glow{border-radius:12px;box-shadow:0 0 0 3px #ffe39acc,0 0 40px #ffe39a88;animation:glow-board var(--fx-ms,2600ms) ease both}
+@keyframes glow-board{0%{opacity:0}15%,70%{opacity:1}100%{opacity:0}}
+.fx.confetti{width:10px;height:16px;border-radius:2px;animation:confetti-fx var(--fx-ms,2600ms) ease-in both}
+@keyframes confetti-fx{0%{opacity:0;transform:translateY(0) rotate(0)}10%{opacity:1}100%{opacity:0;transform:translateY(var(--fall,300px)) rotate(540deg)}}
+.fx.board-flash{border-radius:12px;box-shadow:0 0 0 2px #8fd0ffcc,0 0 28px #8fd0ff88;animation:glow-board .7s ease both}
+@media(prefers-reduced-motion:reduce){.fx{animation:none!important}.fx.telop{opacity:1}}
+
+/* Keep the VRM viewport stable in talk, games, portrait and OBS source scaling. */
+#noa-vrm{display:block;width:100%;height:auto;aspect-ratio:3/4}
+#noa-vrm[hidden],body.vrm #character,.external #noa-vrm{display:none}
+body.vrm .avatar{width:720px;left:600px;top:80px}
+body.vrm #canvas.has-game .avatar{width:600px;left:1260px;top:250px}
+body.vrm #canvas.blocks-mode .avatar{width:760px;left:1040px;top:160px}
+body.vrm.vertical .avatar{width:900px;left:90px;top:460px}
+body.vrm.vertical #canvas.has-game .avatar{width:620px;left:440px;top:1040px}
+body.vrm.vertical #canvas.blocks-mode .avatar{width:620px;left:440px;top:1040px}
+/* Overlay (#layout=overlay): transparent over a captured game window; Noa bottom-right, subtitles bottom-left. */
+:root:has(body.overlay),body.overlay,body.overlay #canvas{background:transparent}
+body.overlay .backdrop,body.overlay #desk,body.overlay #desk-art,body.overlay .game-panel,body.overlay #blocks-panel,body.overlay #blocks-top,body.overlay #blocks-bottom{display:none!important}
+body.overlay #canvas .avatar{width:520px;left:1420px;top:560px;filter:drop-shadow(0 10px 24px #000c)}
+body.overlay #canvas .caption-box{left:40px;right:580px;bottom:36px;padding:16px 28px;background:#0b1120e6}body.overlay #canvas #caption{font-size:34px}
+body.overlay #canvas .picked{left:auto;right:40px;top:170px;width:460px}
+body.overlay #canvas .effect{left:1480px;top:420px}
+.vs-hud{position:absolute;right:40px;top:96px;z-index:6;display:flex;gap:14px;align-items:baseline;padding:10px 18px;border-radius:12px;background:#0b1120d9;border:1px solid #ffffff1f;color:#fffaf0;font-size:20px}.vs-hud b{font-size:22px;color:#9fe0c8}.vs-hud span{color:#d9e2f5}
+
+/* Game frame (#layout=game): the room stays; OBS places the game window exactly over .vs-frame (1120x630 at 48,120). */
+.vs-frame{position:absolute;left:48px;top:120px;width:1120px;height:630px;z-index:3;background:#05070d;border-radius:6px;box-shadow:0 0 0 6px #2d3752,0 0 0 8px #6f7fa855,0 30px 60px #000a}
+.vs-frame .vs-label{position:absolute;left:0;top:-44px;font:600 18px ui-monospace,Menlo,monospace;letter-spacing:4px;color:#9fb0d8}
+body.game-frame .game-panel,body.game-frame #blocks-panel,body.game-frame #blocks-top,body.game-frame #blocks-bottom,body.game-frame #desk,body.game-frame #desk-art,body.game-frame .backdrop .shelf,body.game-frame .backdrop .lamp{display:none!important}
+body.game-frame .backdrop .window{left:1260px;top:70px;width:560px;height:380px}
+body.game-frame #canvas .avatar{width:700px;left:1190px;top:250px}
+body.game-frame #canvas .caption-box{left:48px;right:auto;width:1120px;bottom:40px;padding:18px 30px}body.game-frame #canvas #caption{font-size:34px}
+#caption-en{margin:4px 0 0;font-size:24px;line-height:1.35;font-weight:500;color:#c9d6f0;text-align:left;overflow-wrap:anywhere;text-shadow:0 2px 6px #000a}#caption-en[hidden]{display:none}
+body.game-frame #canvas .caption-box.has-en{bottom:28px;padding-top:10px;padding-bottom:10px}body.game-frame #canvas #caption-en{font-size:20px}
+body.game-frame #canvas .picked{left:auto;right:40px;top:90px;width:480px}
+body.game-frame .vs-hud{left:220px;right:auto;top:64px;padding:8px 16px;font-size:18px}body.game-frame .vs-hud b{font-size:20px}
+body.game-frame #canvas .effect{left:1500px;top:300px}
+/* Always shown in the game layout: the game is played by an AI. Above the frame (the frame itself is covered by OBS). */
+.ai-playing{position:absolute;right:752px;top:62px;z-index:6;display:flex;align-items:center;gap:10px}
+.ai-pill{display:flex;align-items:center;gap:10px;padding:8px 16px;border-radius:999px;background:#0b1120e6;border:1px solid #ff8a8480;color:#fffaf0;font-size:20px;font-weight:700;letter-spacing:1px}
+.ai-pill.ai-admin{color:#d9e2f5;border-color:#9fb0d880}
+.ai-playing i{width:10px;height:10px;border-radius:50%;background:#ff5a52;box-shadow:0 0 0 4px #ff5a5233;animation:ai-dot 1.6s ease-in-out infinite}
+@keyframes ai-dot{50%{opacity:.35}}@media(prefers-reduced-motion:reduce){.ai-playing i{animation:none}}
+/* These boxes set display:flex; the hidden attribute must still hide them outside the game layout. */
+.vs-frame[hidden],.vs-hud[hidden],.ai-playing[hidden]{display:none!important}
+/* In the Studio preview the game itself is not here (OBS lays the game window over the frame): say so. */
+body.preview .vs-frame::after{content:'ゲーム画面（OBSで重ねて表示）';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#6f7fa8;font-size:28px;letter-spacing:2px}
+
+/* The NOA BLOCKS boxes set display:grid; without this their hidden attribute is ignored and they show in every programme. */
+.blocks-panel[hidden],.blocks-top[hidden],.blocks-bottom[hidden]{display:none!important}
+/* Opening talk (lobby) in the game layout: no frame, no badge, Noa in the middle, full-width subtitles. */
+body.game-frame.lobby .vs-frame,body.game-frame.lobby .ai-playing,body.game-frame.lobby .vs-hud{display:none!important}
+body.game-frame.lobby .backdrop .shelf,body.game-frame.lobby .backdrop .lamp{display:block!important}
+body.game-frame.lobby .backdrop .window{left:1130px;top:90px;width:560px;height:520px}
+body.game-frame.lobby #canvas .avatar{width:760px;left:580px;top:120px}
+body.game-frame.lobby #canvas .caption-box{left:96px;right:96px;width:auto;bottom:64px}
+body.game-frame.lobby #canvas .picked{left:96px;right:auto;top:330px;width:520px}
+
+/* The VRM canvas is 3:4; keep it within the game output without covering the game capture. */
+body.vrm.overlay #canvas .avatar{width:480px;left:1440px;top:440px}
+body.vrm.game-frame #canvas .avatar{width:660px;left:1220px;top:200px}
+body.vrm.game-frame.lobby #canvas .avatar{width:720px;left:600px;top:80px}
+/* A quiet invitation, outside the captured game and subtitles; no combined chat feed. */
+.show-context{position:absolute;left:60px;top:70px;max-width:1060px;padding:10px 18px;border-radius:12px;background:#0b1120de;color:#c5d9f4;font-size:24px;line-height:1.5;z-index:6}
+.audience-invite{position:absolute;left:60px;top:150px;width:510px;padding:18px 22px;border:1px solid #a4b9e33d;border-radius:16px;background:#0b1120eb;z-index:6;line-height:1.5;color:#eef3ff}
+.audience-invite p{margin:0}.audience-invite #invite-welcome{font-size:23px;font-weight:600;color:#d4e9ff}.audience-invite #invite-detail{font-size:18px;color:#b5c4dc;margin-top:5px}.audience-invite #invite-question{font-size:22px;color:#ffebba;margin-top:8px}
+.show-context[hidden],.audience-invite[hidden],#invite-question[hidden]{display:none!important}
+.decision-hud{position:absolute;left:48px;top:775px;width:1120px;max-height:144px;overflow:hidden;z-index:7;padding:12px 22px;border-radius:12px;background:#f8fcffff;color:#172b42;border-left:5px solid #34b5ae;box-shadow:0 4px 16px #0003;pointer-events:none;display:grid;grid-template-columns:1fr auto;gap:3px 20px;line-height:1.3}
+.decision-hud[hidden],body:not(.game-frame) .decision-hud,body.vertical .decision-hud,body.lobby .decision-hud{display:none!important}
+/* Always-on action log (action-log-view.mjs): the last five commands, bottom right beside the game frame. */
+.action-log{position:absolute;right:40px;bottom:40px;width:430px;z-index:7;padding:12px 18px 14px;border-radius:12px;background:#0b1120e0;border:1px solid #ffffff1f;color:#fffaf0;pointer-events:none;font-size:22px;line-height:1.45}
+.action-log-title{font-size:16px;letter-spacing:2px;color:#9fe0c8;margin-bottom:4px}
+.action-log-items{list-style:none;margin:0;padding:0}
+.action-log-item{display:grid;grid-template-columns:62px 34px 1fr;gap:6px;white-space:nowrap;overflow:hidden;opacity:.55}
+.action-log-item:last-child{opacity:1;font-weight:700}
+.action-log-item.levelup{color:#ffd77a}
+.action-log-time{font:500 17px ui-monospace,Menlo,monospace;color:#9fb0d8;align-self:center}
+.action-log-arrow{text-align:center}
+.action-log[hidden],body:not(.game-frame) .action-log,body.vertical .action-log,body.lobby .action-log,body.actions-external .action-log{display:none!important}
+.decision-title{font:700 16px ui-monospace,Menlo,monospace;letter-spacing:1.5px;color:#297777;grid-column:1}
+.decision-choice{font-size:29px;font-weight:750;grid-column:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.decision-hp{font-size:19px;color:#385068;grid-column:2;grid-row:1 / 3;align-self:center}
+.decision-candidates{grid-column:1 / -1;display:flex;gap:20px;list-style:none;padding:0;margin:2px 0 0;font-size:20px;white-space:nowrap;overflow:hidden}
+.decision-candidates>*{max-width:32%;overflow:hidden;text-overflow:ellipsis}
+.decision-candidate{display:flex;gap:9px;align-items:baseline;color:#526575}.decision-candidate[data-selected="true"]{font-weight:700;color:#087c77}.decision-candidate-label{overflow:hidden;text-overflow:ellipsis}.decision-candidate-probability{font-variant-numeric:tabular-nums}
+.decision-note{grid-column:1 / -1;font-size:16px;color:#4d6476}
+body.game-frame:not(.vertical) #canvas:has(.decision-hud:not([hidden])) .audience-invite{visibility:hidden}
+body.game-frame:not(.lobby) .show-context{left:48px;top:14px;width:1120px;padding:5px 0;background:transparent;font-size:23px}
+body.game-frame:not(.lobby) .audience-invite{left:48px;top:775px;width:1120px;padding:12px 20px}
+body.game-frame:not(.lobby) .audience-invite #invite-detail{font-size:17px;margin-top:2px}
+body.game-frame:not(.lobby) .audience-invite #invite-question{font-size:21px;margin-top:4px}
+#canvas.blocks-mode .show-context{left:1190px;top:145px;max-width:690px;font-size:21px}
+#canvas.blocks-mode .audience-invite{left:1190px;top:710px;width:680px}
+#canvas.has-game:not(.blocks-mode) .show-context{left:1380px;top:385px;max-width:470px;font-size:21px}
+#canvas.has-game:not(.blocks-mode) .audience-invite{left:1380px;top:470px;width:470px}
+body.overlay .show-context{left:40px;top:30px;font-size:21px}
+body.overlay .audience-invite{left:40px;top:100px;width:520px}
+body.vertical .show-context{left:50px;top:80px;width:980px;max-width:980px}
+body.vertical .audience-invite{left:50px;top:165px;width:980px}
+body.vertical #canvas.has-game .show-context{left:50px;top:1050px;width:980px;max-width:980px}
+body.vertical #canvas.has-game .audience-invite{left:50px;top:1100px;width:900px}
+
+/* Static 16:9 advertising canvas. Image pixels are contained, never cropped. */
+.sponsor-card{position:absolute;right:40px;top:30px;width:480px;aspect-ratio:16/9;height:auto;z-index:6;padding:0;border:0;border-radius:10px;background:#fff;color:#26323d;pointer-events:none;box-shadow:0 6px 20px #0000001a;isolation:isolate}
+.sponsor-card[hidden],.sponsor-card [hidden]{display:none!important}
+.sponsor-card>img,.sponsor-card>video{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;border-radius:inherit}
+.sponsor-copy{position:absolute;inset:0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:22px;text-align:center}
+.sponsor-label{display:block;max-width:100%;font-size:13px;line-height:1.2;font-weight:700;letter-spacing:1.5px;color:#486157}
+.sponsor-card strong{display:block;max-width:100%;font-size:30px;line-height:1.25;letter-spacing:.5px;margin-top:10px;color:#1b2833;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sponsor-card p{font-size:18px;line-height:1.45;margin:10px 0 0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;overflow-wrap:anywhere;color:#48545f}
+.sponsor-link{display:block;max-width:100%;font-size:16px;line-height:1.3;margin-top:12px;color:#315f55;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sponsor-card[data-sponsor-mode=sponsor] .sponsor-label{color:#80520f}
+/* The disclosure stays visible above the creative, without covering its artwork. */
+.sponsor-card:has(>img:not([hidden])) .sponsor-copy,.sponsor-card:has(>video:not([hidden])) .sponsor-copy{padding:0;justify-content:flex-start}
+.sponsor-card:has(>img:not([hidden])) .sponsor-copy>:not(.sponsor-label),.sponsor-card:has(>video:not([hidden])) .sponsor-copy>:not(.sponsor-label){display:none}
+.sponsor-card:has(>img:not([hidden])) .sponsor-label,.sponsor-card:has(>video:not([hidden])) .sponsor-label{position:absolute;right:0;bottom:calc(100% + 5px);padding:2px 8px;border-radius:4px;background:#fff;font-size:12px;letter-spacing:1px;line-height:1.2}
+/* The game ends at x1168. Keep extra headroom above the 2D hairstyle. */
+body.game-frame:not(.lobby):not(.vertical):not(.vrm) #canvas .sponsor-card{width:416px}
+/* Comments sit lower on the right, clear of the face and ad. */
+body.game-frame:not(.lobby):not(.vertical) #canvas.sponsor-enabled .picked{top:auto;bottom:140px;padding:14px 20px}
+body.game-frame:not(.lobby):not(.vertical) #canvas.sponsor-enabled .picked small{line-height:1.3;margin-bottom:6px}
+body.game-frame:not(.lobby):not(.vertical) #canvas.sponsor-enabled .picked p{line-height:1.4;max-height:2.8em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+#canvas.blocks-mode .sponsor-card{width:416px}
+#canvas.blocks-mode.sponsor-enabled .blocks-top{right:520px}#canvas.blocks-mode.sponsor-enabled .blocks-top h1{font-size:42px}
+#canvas.blocks-mode.sponsor-enabled .show-context{left:830px;top:140px;width:570px;max-width:570px}
+#canvas.blocks-mode.sponsor-enabled .picked{left:830px;right:auto;top:270px;width:340px;padding:14px 20px}
+#canvas.has-game:not(.blocks-mode) .sponsor-card{top:30px;width:416px}
+#canvas.has-game:not(.blocks-mode).sponsor-enabled .picked{top:276px;bottom:auto;padding:8px 20px}
+#canvas.has-game:not(.blocks-mode).sponsor-enabled .picked small{line-height:1.2;margin-bottom:5px}
+#canvas.has-game:not(.blocks-mode).sponsor-enabled .picked p{font-size:22px;line-height:1.35;max-height:2.7em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+body.overlay #canvas.sponsor-enabled .vs-hud{top:312px}
+body.overlay #canvas.sponsor-enabled .picked{top:370px;bottom:auto;padding:10px 20px}
+body.overlay #canvas.sponsor-enabled .picked small{line-height:1.2;margin-bottom:6px}
+body.overlay #canvas.sponsor-enabled .picked p{font-size:22px;line-height:1.4;max-height:2.8em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+/* Portrait keeps the same creative ratio beside the programme information. */
+body.vertical #canvas .sponsor-card{left:50px;right:auto;top:30px;width:480px}
+body.vertical #canvas.sponsor-enabled .show-context{left:560px;top:30px;width:470px;max-width:470px}
+body.vertical #canvas.sponsor-enabled .audience-invite{left:560px;top:125px;width:470px}
+body.vertical #canvas.sponsor-enabled .picked{top:340px}
+body.vertical #canvas.has-game .sponsor-card,body.vertical #canvas.blocks-mode .sponsor-card{left:50px;top:1050px;width:448px}
+body.vertical #canvas.has-game.sponsor-enabled .show-context{left:50px;top:1330px;width:420px;max-width:420px}
+body.vertical #canvas.has-game.sponsor-enabled .audience-invite{left:50px;top:1420px;width:420px}
+body.vertical #canvas.has-game.sponsor-enabled .picked{left:50px;top:1420px;bottom:auto;width:420px;padding:12px 20px}
+body.vertical #canvas.has-game.sponsor-enabled .picked p{font-size:22px;line-height:1.4;max-height:2.8em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+body.vertical #canvas.has-game.sponsor-enabled:has(.picked.show) .audience-invite{visibility:hidden}
+body.vertical #canvas.blocks-mode.sponsor-enabled .blocks-top{right:0}
+
+/* The bust camera keeps the existing pixel buffer; move its game viewport below the comment band. */
+body.vrm.game-frame:not(.lobby) #canvas .avatar{top:260px}
+body.vrm:not(.vertical):not(.game-frame):not(.overlay) #canvas.has-game:not(.blocks-mode) .avatar{width:520px;left:1380px;top:600px}
+body.vrm.vertical #canvas.has-game .avatar,body.vrm.vertical #canvas.blocks-mode .avatar{top:1210px}
+/* A close-up leaves less empty headroom in the other game and portrait layouts. */
+body.vrm:not(.vertical) #canvas.blocks-mode .picked{left:830px;right:auto;top:270px;width:340px;padding:14px 20px}
+body.vrm.vertical #canvas:not(.has-game):not(.blocks-mode) .picked{top:440px;padding:14px 20px}
+body.vrm:not(.vertical) #canvas.blocks-mode .picked small,body.vrm.vertical #canvas:not(.has-game):not(.blocks-mode) .picked small{line-height:1.3;margin-bottom:6px}
+body.vrm:not(.vertical) #canvas.blocks-mode .picked p,body.vrm.vertical #canvas:not(.has-game):not(.blocks-mode) .picked p{line-height:1.4;max-height:2.8em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+
+body.vrm.vertical #canvas.sponsor-enabled:not(.has-game):not(.blocks-mode) .picked{top:340px}
+
+/* NOA BEER (DRINK_MODE; public/stage-theme.mjs DRINK_CAN_BOXES): the can beside Noa; a sip lifts and tilts it with a small pop. */
+.drink-can{position:absolute;left:1300px;top:740px;width:85px;height:180px;z-index:5;pointer-events:none;filter:drop-shadow(0 10px 14px #000a);--tilt:-1}
+.drink-can[hidden]{display:none}
+.drink-can img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%}
+body.game-frame #canvas .drink-can{left:1196px;top:770px;width:81px;height:170px}
+body.game-frame.lobby:not(.theme-room) #canvas .drink-can{left:1300px;top:740px;width:85px;height:180px}
+body:not(.game-frame) #canvas.has-game .drink-can{display:none}
+body.room-talk #canvas .drink-can{left:1210px;top:600px;width:81px;height:170px}
+body.room-game #canvas .drink-can{left:1432px;top:386px;width:71px;height:150px}
+/* The can tips toward Noa: it stands on her left (viewer's view) in the game layouts, on her right otherwise. */
+body.game-frame:not(.lobby) #canvas .drink-can,body.room-game #canvas .drink-can{--tilt:1}
+body.room-talk #canvas .drink-can{--tilt:-1}
+.drink-can.sip img{animation:drink-sip 2.4s ease-in-out both}
+@keyframes drink-sip{0%{transform:none}25%{transform:translateY(-40px) rotate(calc(var(--tilt) * 28deg))}60%{transform:translateY(-40px) rotate(calc(var(--tilt) * 34deg))}85%{transform:translateY(-4px) rotate(calc(var(--tilt) * 4deg))}100%{transform:none}}
+.drink-pop{position:absolute;left:50%;bottom:100%;margin-bottom:6px;transform:translateX(-50%);white-space:nowrap;padding:4px 12px;border-radius:999px;background:#0b1120e6;border:1px solid #eed29c;color:#fff4d6;font-size:20px;font-weight:700;opacity:0}
+.drink-can.sip .drink-pop{animation:drink-pop 2.4s ease both}
+body.room-game #canvas .drink-pop{left:75%}
+@keyframes drink-pop{0%{opacity:0;transform:translate(-50%,8px)}20%,75%{opacity:1;transform:translate(-50%,-10px)}100%{opacity:0;transform:translate(-50%,-18px)}}
+@media(prefers-reduced-motion:reduce){.drink-can.sip img,.drink-can.sip .drink-pop{animation:none}.drink-can.sip .drink-pop{opacity:1}}
+
+/* ---- STAGE_THEME=room (public/stage-theme.mjs): Noa's night room from the Noa OBS asset pack. Every rule below is scoped to
+   body.theme-room (room-talk: talk and opening talk; room-game: the external game layout); the classic look is untouched.
+   Boxes follow the pack's docs/coordinates.json (ROOM_BOXES); OBS lays the game capture and the chat / command sources
+   over the same boxes (src/obs.mjs ROOM_*). */
+.room-ui,.room-reaction{display:none}
+body.theme-room{--rserif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP",serif;--rsans:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;--rgold:#eed29c;--rink:#f5f3ff}
+body.theme-room #canvas{background:#0a1226 url(/models/room/nightroom.png) 0 0/1920px 1080px no-repeat}
+body.theme-room .backdrop,body.theme-room #desk,body.theme-room #desk-art,body.theme-room #show-context,body.theme-room #audience-invite,body.theme-room #vs-frame .vs-label{display:none!important}
+body.theme-room .room-ui{display:block;position:absolute;inset:0;z-index:3;pointer-events:none;color:var(--rink)}
+body.theme-room .rf-defs{position:absolute;width:0;height:0;overflow:hidden}
+body.theme-room .rf{position:absolute;left:0;top:0;width:1920px;height:1080px;display:none}
+body.room-talk .rf-talk,body.room-game .rf-game{display:block}
+body.theme-room .rf-chat,body.theme-room #canvas:not(.sponsor-enabled) .rf-pr{display:none}
+body.theme-room.room-chat .rf-chat{display:inline}
+/* Theme / goal: label in the frame's heading, the text in its content box (stage.mjs fits long text). */
+body.theme-room #room-topic-label{position:absolute;font:400 28px/1 var(--rserif);letter-spacing:2px;white-space:nowrap}
+body.room-talk #room-topic-label{left:1461px;top:58px}
+body.room-game #room-topic-label{left:646px;top:71px;font-size:29px}
+body.theme-room #room-topic-text{position:absolute;margin:0;display:flex;align-items:center;overflow:hidden;font:500 30px/1.2 var(--rserif);letter-spacing:1px;overflow-wrap:anywhere;text-shadow:0 2px 5px #010714}
+body.room-talk #room-topic-text{left:1410px;top:108px;width:448px;height:51px}
+body.room-game #room-topic-text{left:840px;top:61px;width:390px;height:53px;font-size:28px}
+/* Comment panel heading (the chat itself is the OBS source on the content box): an always-on call to chat + platform badges. */
+body.theme-room .room-chat-head{position:absolute;display:none;flex-direction:column;justify-content:center;gap:5px}
+body.theme-room.room-chat .room-chat-head{display:flex}
+body.room-talk .room-chat-head{left:1404px;top:220px;width:466px;height:58px}
+body.room-game .room-chat-head{left:1454px;top:565px;width:424px;height:58px}
+.room-cheer{font:800 21px/1.15 var(--rsans);letter-spacing:.3px;color:var(--rgold);white-space:nowrap;animation:room-cheer 2.8s ease-in-out infinite}
+body.room-game .room-cheer{font-size:19px;letter-spacing:0}
+.room-cheer-row{display:flex;align-items:center;gap:6px;min-width:0}
+.room-cheer-row small{font:500 13px/1.2 var(--rsans);color:#c9d6f0;white-space:nowrap;margin-right:auto}
+.room-cheer-row small[hidden]{display:none}
+.room-badge{font:700 11px/1 var(--rsans);font-style:normal;letter-spacing:.3px;padding:3px 6px;border-radius:4px;color:#fff;flex:none}
+.room-badge.yt{background:#e02424}.room-badge.tw{background:#9146ff}.room-badge[hidden]{display:none}
+@keyframes room-cheer{0%,100%{opacity:.88;text-shadow:0 0 8px #eed29c33,0 2px 4px #010714}50%{opacity:1;text-shadow:0 0 18px #eed29c99,0 2px 4px #010714}}
+/* The answered comment (いま返答中) in its frame; between comments a quiet welcome in the same box. */
+body.theme-room .room-sel-head{position:absolute;font:400 26px/1 var(--rserif);letter-spacing:2px;color:var(--rgold);white-space:nowrap}
+body.room-talk .room-sel-head{left:1470px;top:640px}
+body.room-game .room-sel-head{left:114px;top:951px;font-size:22px}
+.room-sel-head .on,#canvas:has(#picked.show) .room-sel-head .idle{display:none}#canvas:has(#picked.show) .room-sel-head .on{display:inline}
+body.theme-room .room-idle{position:absolute;margin:0;display:flex;align-items:center;overflow:hidden;font:500 18px/1.4 var(--rsans);color:#aab8d8;transition:opacity .3s}
+body.room-talk .room-idle{left:1430px;top:695px;width:428px;height:66px}
+body.room-game .room-idle{left:70px;top:987px;width:396px;height:40px;font-size:15px;line-height:1.3}
+#canvas:has(#picked.show) .room-idle{opacity:0}
+body.theme-room #canvas #picked{right:auto;bottom:auto;padding:0;border-radius:0;background:none;box-shadow:none;color:var(--rink);display:flex;align-items:center}
+body.room-talk #canvas #picked{left:1430px;top:695px;width:428px;height:66px}
+body.room-game #canvas #picked{left:70px;top:987px;width:396px;height:40px}
+body.theme-room #canvas #picked small{display:none}
+body.theme-room #canvas #picked-text{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:none;max-height:none;overflow:hidden;font:600 23px/1.38 var(--rsans);text-shadow:0 2px 5px #010714}
+body.room-game #canvas #picked-text{line-height:1.3}
+/* Subtitles: whole lines in the subtitle frame, fitted (up to 3 Japanese lines and the optional English line). */
+body.theme-room #canvas #caption-box{right:auto;bottom:auto;transform:none;max-width:none;padding:0;border:0;border-radius:0;background:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;justify-content:center;overflow:hidden}
+body.room-talk #canvas #caption-box{left:196px;top:926px;width:1040px;height:100px}
+body.room-game #canvas #caption-box{left:548px;top:941px;width:730px;height:100px}
+body.theme-room #canvas #caption{font-weight:600;line-height:1.32;letter-spacing:.5px;color:var(--rink);text-shadow:0 2px 5px #010714}
+body.theme-room #canvas #caption-en{margin-top:2px;line-height:1.3;color:#c9d6f0}
+body.theme-room #canvas .caption-name{font-size:13px;letter-spacing:2px;color:var(--rgold);margin-bottom:2px}
+body.theme-room #canvas #sources a{font-size:11px}
+/* Noa: centred in the talk box (her lower body passes behind the subtitle frame, as the pack's guide allows); in the
+   game, the top-right box, her lower body behind the rail and comment panel. */
+body.theme-room #canvas #avatar{filter:drop-shadow(0 16px 28px #0009)}
+body.room-talk #canvas #avatar{left:408px;top:24px;width:792px}
+body.room-talk.vrm #canvas #avatar{left:424px;top:67px;width:760px}
+body.room-game #canvas #avatar{left:1438px;top:24px;width:448px}
+body.theme-room #canvas #avatar.zoom{transform:scale(1.04) translateY(8px)}
+/* Advertising: the existing 16:9 card, scaled into the PR box; the frame's heading carries the disclosure label. */
+body.theme-room #canvas #sponsor-card{right:auto;width:480px;transform-origin:0 0;box-shadow:none;border-radius:4px}
+body.room-talk #canvas #sponsor-card{left:1468px;top:832px;transform:scale(.73333)}
+body.room-game #canvas #sponsor-card{left:1524px;top:884px;transform:scale(.6)}
+body.theme-room #canvas #sponsor-card .sponsor-label{display:none}
+body.theme-room .room-pr-label{position:absolute;font:400 19px/1 var(--rserif);letter-spacing:1px;color:var(--rgold);white-space:nowrap}
+body.room-talk .room-pr-label{left:1468px;top:801px}
+body.room-game .room-pr-label{left:1524px;top:853px}
+body.theme-room #canvas:not(.sponsor-enabled) .room-pr-label{display:none}
+body.theme-room #canvas .credit{right:24px;bottom:6px;max-width:520px;text-align:right;font-size:13px;color:#aab8d8;text-shadow:0 1px 3px #010714}
+/* Game: OBS lays the game window exactly over game_content; the AI disclosure and run record sit in the top strip. */
+body.room-game #canvas #vs-frame{left:32px;top:140px;width:1376px;height:774px;border-radius:0;box-shadow:none;background:#04060c}
+body.room-game #canvas #ai-playing{right:508px;top:12px;gap:8px}
+body.room-game #canvas #vs-hud{left:470px;right:auto;top:12px;padding:6px 14px;gap:10px;font-size:16px;border-radius:999px;background:#061228e6;border:1px solid #eed29c55}
+body.room-game #canvas #vs-hud b{font-size:17px;color:var(--rgold)}
+body.room-game #canvas .ai-pill{padding:6px 14px;font-size:16px;background:#061228e6}
+body.room-game #canvas .ai-pill.ai-admin{border-color:#eed29c55}
+body.room-game #canvas #decision-hud{left:840px;top:772px;width:552px;max-height:128px;padding:10px 18px;border-radius:12px;background:#061228ee;color:var(--rink);border-left:4px solid var(--rgold);box-shadow:inset 0 0 0 1px #eed29c33}
+body.room-game #canvas #decision-hud .decision-title{color:var(--rgold);font-size:14px}
+body.room-game #canvas #decision-hud .decision-choice{font-size:24px}
+body.room-game #canvas #decision-hud .decision-hp,body.room-game #canvas #decision-hud .decision-note{color:#c9d6f0;font-size:14px}
+body.room-game #canvas #decision-hud .decision-candidates{font-size:16px}
+body.room-game #canvas #decision-hud .decision-candidate{color:#aab8d8}body.room-game #canvas #decision-hud .decision-candidate[data-selected="true"]{color:var(--rgold)}
+/* Noa's commands as a slim strip along the bottom of the game window (same spot as the OBS commands source). */
+body.room-game #canvas #action-log{left:44px;right:auto;top:870px;bottom:auto;width:780px;height:36px;padding:0 14px;display:flex;align-items:center;gap:12px;border-radius:18px;background:linear-gradient(90deg,#061228eb,#0c1a37cc);border:0;box-shadow:inset 0 0 0 1px #eed29c66;font-size:17px;line-height:1}
+body.room-game #canvas #action-log .action-log-title{flex:none;margin:0;font:400 15px/1 var(--rserif);color:var(--rgold)}
+body.room-game #canvas #action-log .action-log-items{display:flex;gap:16px;min-width:0;overflow:hidden;justify-content:flex-end;flex:1}
+body.room-game #canvas #action-log .action-log-item{display:flex;gap:6px;flex:none}
+body.room-game #canvas #action-log .action-log-item:nth-last-child(n+4){display:none}
+body.room-game #canvas #action-log .action-log-time{font-size:14px}
+/* Reaction stickers (react<name>.png) beside Noa's head: a small pop, then a fade. */
+body.theme-room .room-reaction{display:block;position:absolute;z-index:7;pointer-events:none;filter:drop-shadow(0 4px 8px #0006);animation:room-react var(--react-ms,1800ms) ease both}
+body.theme-room .room-reaction[hidden]{display:none}
+@keyframes room-react{0%{opacity:0;transform:scale(.55) translateY(8px)}14%{opacity:1;transform:scale(1.08)}24%{transform:scale(1)}78%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.96) translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){body.theme-room .room-reaction,.room-cheer{animation:none}}
+/* Operator 2026-10-10: the game goal over the moon was hard to read. A dark plate behind it, bold sans, wider box. */
+body.room-game #room-topic-text{left:830px;top:58px;width:560px;height:62px;padding:2px 16px;box-sizing:border-box;border-radius:12px;background:linear-gradient(90deg,#071024f2,#0b1838e6);box-shadow:inset 0 0 0 1px #eed29c80,0 4px 14px #0008;font:700 26px/1.25 var(--rsans);color:#fff6dc;letter-spacing:.5px;text-shadow:0 1px 2px #000,0 0 6px #000c}
+/* ROOM_GAME_LAYOUT=front (stage-theme.mjs ROOM_BOXES.front, operator 2026-10-19): OBS puts the game capture under this page,
+   so the page is transparent over the game window (a hole in the room picture) and Noa, drawn here, stands in front of the
+   game's lower-right corner. The ad, the answered comment and the chat take the right-hand column; subtitles under the game. */
+:root:has(body.room-game.room-front),body.room-game.room-front{background:transparent}
+body.room-game.room-front #canvas{background:transparent}
+body.room-game.room-front #canvas::before{content:"";position:absolute;inset:0;z-index:0;background:#0a1226 url(/models/room/nightroom.png) 0 0/1920px 1080px no-repeat;clip-path:path(evenodd,"M0 0H1920V1080H0Z M24 96H1480V915H24Z")}
+body.room-game.room-front .rf-game{display:none}
+body.room-game.room-front .rf-front{display:block}
+body.room-game.room-front #canvas #vs-frame{left:24px;top:96px;width:1456px;height:819px;background:transparent}
+body.room-game.room-front #canvas #avatar{left:1020px;top:461px;width:487px;z-index:4}
+body.room-game.room-front #room-topic-label{left:310px;top:36px;font-size:28px}
+body.room-game.room-front #room-topic-text{left:470px;top:20px;width:760px;height:60px}
+body.room-game.room-front #canvas #ai-playing{right:24px;top:30px}
+body.room-game.room-front #canvas #vs-hud{left:1270px;top:30px}
+body.room-game.room-front #canvas #sponsor-card{left:1512px;top:140px;transform:scale(.8)}
+body.room-game.room-front .room-pr-label{left:1512px;top:108px}
+body.room-game.room-front .room-sel-head{left:1522px;top:378px;font-size:20px}
+body.room-game.room-front .room-idle,body.room-game.room-front #canvas #picked{left:1512px;top:404px;width:384px;height:66px}
+body.room-game.room-front .room-chat-head{left:1512px;top:486px;width:384px;height:58px}
+body.room-game.room-front #canvas #caption-box{left:48px;top:936px;width:960px;height:116px}
+body.room-game.room-front #canvas #decision-hud{left:40px;top:740px;width:520px}
+body.room-game.room-front #canvas .drink-can{left:1036px;top:925px;width:66px;height:140px}
+body.room-game.room-front #canvas .credit{left:48px;right:auto;bottom:0;max-width:960px;text-align:left;font-size:12px}
+body.room-game.room-front .room-cheer{font-size:16px}
+/* ROOM_GAME_LAYOUT=full (ROOM_BOXES.full, operator 2026-10-19 案C): the game fills the screen under this page. Nothing
+   covers its top strip (Vampire's HUD) or the centre (the player). A soft shade along the bottom and the lower left edge
+   keeps the overlays readable; Noa stands bottom-right with a rim light; her subtitles are a speech bubble beside her
+   with the answered comment quoted at its top; one status bar carries the name, goal, run and the AI disclosure. */
+:root:has(body.room-game.room-full),body.room-game.room-full{background:transparent}
+body.room-game.room-full #canvas{background:transparent}
+body.room-game.room-full #canvas::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(0deg,#060c22d9 0,#060c2280 13%,#060c2200 30%),linear-gradient(90deg,#060c22a6,#060c2200) 0 420px/620px 660px no-repeat}
+body.room-game.room-full .rf-game,body.room-game.room-full .rf-front{display:none}
+body.room-game.room-full .rf-full{display:block}
+body.room-game.room-full #canvas #vs-frame{left:0;top:0;width:1920px;height:1080px;background:transparent}
+body.room-game.room-full #canvas #avatar{left:1380px;top:380px;width:560px;z-index:4;filter:drop-shadow(0 0 10px #78aaffaa) drop-shadow(0 16px 28px #0009)}
+body.room-game.room-full #canvas #caption-box{left:740px;top:786px;width:640px;height:206px;box-sizing:border-box;padding:52px 28px 14px;border:2px solid #96afffc8;border-radius:28px;background:#08102ae6;box-shadow:0 10px 30px #0008;justify-content:center;transition:opacity .3s}
+body.room-game.room-full #canvas #caption-box::after{content:"";position:absolute;right:-30px;top:64px;border:18px solid transparent;border-left:32px solid #96afffc8}
+body.room-game.room-full #canvas:has(#caption:empty) #caption-box{opacity:0}
+body.room-game.room-full #canvas #picked{left:764px;top:798px;width:592px;height:36px;padding:0 14px;box-sizing:border-box;border-radius:12px;background:#1e2850;box-shadow:inset 0 0 0 1px #eed29ccc;z-index:7}
+body.room-game.room-full #canvas #picked-text{font-size:19px;line-height:36px;-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;color:var(--rgold)}
+body.room-game.room-full .room-sel-head,body.room-game.room-full .room-idle{display:none}
+body.room-game.room-full #room-topic-label{left:204px;top:1021px;font:700 19px/1 var(--rsans);color:var(--rgold);letter-spacing:1px}
+body.room-game.room-full #room-topic-text{left:318px;top:1012px;width:462px;height:40px;padding:0;border-radius:0;background:none;box-shadow:none;font-size:24px}
+body.room-game.room-full #canvas #vs-hud{left:796px;top:1014px}
+body.room-game.room-full #canvas #ai-playing{right:auto;left:890px;top:1014px}
+body.room-game.room-full #canvas #ai-playing .ai-pill{font-size:14px;padding:5px 12px}
+body.room-game.room-full #canvas #sponsor-card{left:1576px;top:140px;transform:scale(.66667)}
+body.room-game.room-full .room-pr-label{left:1576px;top:112px}
+body.room-game.room-full .room-chat-head{left:24px;top:498px;width:496px;height:56px}
+body.room-game.room-full .room-cheer{font-size:18px}
+body.room-game.room-full #canvas #decision-hud{left:24px;top:390px;width:496px}
+body.room-game.room-full #canvas .drink-can{left:1384px;top:936px;width:60px;height:128px}
+body.room-game.room-full #canvas .credit{left:48px;right:auto;bottom:0;max-width:1300px;text-align:left;font-size:11px}
+body.room-game.room-full .room-chat-head{box-sizing:border-box;padding:6px 14px;border-radius:14px;background:#060c22c4;box-shadow:inset 0 0 0 1px #eed29c55}
+/* ROOM_GAME_LAYOUT=frame (ROOM_BOXES.frame, operator 2026-10-19 案D after a reference screen): the game in a glowing
+   1600x900 frame (a hole in the drawn night sky; the capture is under this page), a LIVE clock and the LIVE CHAT panel
+   in the right-hand column with the ad under them, NOW PLAYING with the goal and the AI disclosure in the game's
+   lower-left, a speech bubble beside Noa, Noa as a big bust bottom-right, a name banner along the bottom. */
+body.theme-room .framed-ui{display:none}
+:root:has(body.room-game.room-frame),body.room-game.room-frame{background:transparent}
+body.room-game.room-frame #canvas{background:transparent}
+body.room-game.room-frame .rf-game,body.room-game.room-frame .rf-front,body.room-game.room-frame .rf-full{display:none}
+body.room-game.room-frame .rf-framed{display:block}
+body.room-game.room-frame .framed-ui{display:block}
+body.room-game.room-frame #canvas #vs-frame{left:8px;top:8px;width:1680px;height:945px;border-radius:16px;z-index:1;background:radial-gradient(ellipse 980px 420px at 0 100%,#060c22f2,#060c22b8 48%,#060c2200 78%)}
+body.room-game.room-frame #canvas #avatar{left:1220px;top:520px;width:640px;z-index:4;filter:drop-shadow(0 0 16px #6fa8ffbb) drop-shadow(-24px 18px 36px #000b)}
+body.room-game.room-frame .frame-clock{position:absolute;left:1716px;top:16px;width:180px;height:90px;color:#f0f6ff}
+body.room-game.room-frame .frame-clock b{position:absolute;left:0;top:2px;font:800 22px/1 var(--rsans);color:#ff5a6e;letter-spacing:1px}
+body.room-game.room-frame .frame-clock strong{position:absolute;left:0;top:34px;font:800 44px/1 var(--rsans);letter-spacing:1px}
+body.room-game.room-frame .frame-clock small{position:absolute;right:0;top:4px;font:600 15px/1 var(--rsans);color:#bed2f5}
+body.room-game.room-frame .frame-now{position:absolute;left:40px;top:766px;width:690px;color:#f0f6ff}
+body.room-game.room-frame .frame-now small{display:block;font:600 20px/1 var(--rsans);letter-spacing:1px;color:#96beff}
+body.room-game.room-frame .frame-now strong{display:block;margin-top:8px;font:800 40px/1.1 var(--rsans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 2px 6px #000a}
+body.room-game.room-frame #room-topic-label{left:40px;top:846px;font:600 22px/1 var(--rsans);color:#bed2f5;letter-spacing:0}
+body.room-game.room-frame #room-topic-label::after{content:"："}
+body.room-game.room-frame #room-topic-text{left:222px;top:836px;width:512px;height:40px;padding:0;border-radius:0;background:none;box-shadow:none;font-size:24px;color:#e6efff}
+body.room-game.room-frame #canvas #ai-playing{right:auto;left:36px;top:884px}
+body.room-game.room-frame #canvas #ai-playing .ai-pill{font-size:14px;padding:5px 12px}
+body.room-game.room-frame #canvas #vs-hud{left:552px;top:884px}
+body.room-game.room-frame #canvas #caption-box{left:740px;top:740px;width:520px;height:170px;box-sizing:border-box;padding:50px 26px 12px;border:2px solid #96beffdc;border-radius:26px;background:#08102ee6;box-shadow:0 10px 30px #0008;justify-content:center;transition:opacity .3s}
+body.room-game.room-frame #canvas #caption-box::after{content:"";position:absolute;right:-30px;top:60px;border:18px solid transparent;border-left:32px solid #96beffdc}
+body.room-game.room-frame #canvas:has(#caption:empty) #caption-box{opacity:0}
+body.room-game.room-frame #canvas #picked{left:758px;top:752px;width:484px;height:32px;padding:0 14px;box-sizing:border-box;border-radius:12px;background:#1e2850;box-shadow:inset 0 0 0 1px #eed29ccc;z-index:7}
+body.room-game.room-frame #canvas #picked-text{font-size:17px;line-height:32px;-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;color:var(--rgold)}
+body.room-game.room-frame .room-sel-head,body.room-game.room-frame .room-idle,body.room-game.room-frame .room-chat-head{display:none!important}
+body.room-game.room-frame #canvas #sponsor-card{left:1700px;top:452px;transform:scale(.44167)}
+body.room-game.room-frame .room-pr-label{left:1702px;top:430px;font-size:14px}
+body.room-game.room-frame #canvas #decision-hud{left:32px;top:600px;width:520px}
+body.room-game.room-frame #canvas .drink-can{left:1062px;top:968px;width:50px;height:106px}
+body.room-game.room-frame .frame-hashtag,body.room-game.room-frame .frame-social,body.room-game.room-frame .frame-tagline{position:absolute;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body.room-game.room-frame .frame-hashtag{left:470px;top:992px;max-width:280px;font:700 24px/1.2 var(--rsans);color:#f0f6ff}
+body.room-game.room-frame .frame-social{left:470px;top:1030px;max-width:280px;font:700 22px/1.2 var(--rsans);color:#aacdff}
+body.room-game.room-frame .frame-tagline{left:770px;top:986px;width:280px;max-height:72px;white-space:pre-line!important;font:400 24px/1.4 var(--rserif);color:#f0f6ff}
+body.room-game.room-frame .frame-hashtag[hidden],body.room-game.room-frame .frame-social[hidden],body.room-game.room-frame .frame-tagline[hidden]{display:none}
+body.room-game.room-frame #canvas .credit{left:470px;right:auto;bottom:0;max-width:580px;text-align:left;font-size:10px}
+/* Frame layout finish (operator 2026-10-19: closer to the reference): twinkling stars, a pulsing LIVE dot, a glowing
+   NOW PLAYING with an accent line, a lead before the goal, small ornaments on the banner's texts. */
+body.room-game.room-frame .rf-framed .tw{animation:rfd-twinkle 3.2s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes rfd-twinkle{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes rfd-pulse{0%,100%{box-shadow:0 0 0 0 #ff5a6e99}60%{box-shadow:0 0 0 7px #ff5a6e00}}
+body.room-game.room-frame .frame-clock b{padding-left:16px}
+body.room-game.room-frame .frame-clock b::before{content:"";position:absolute;left:0;top:6px;width:10px;height:10px;border-radius:50%;background:#ff4d63;animation:rfd-pulse 1.8s ease-out infinite}
+body.room-game.room-frame .frame-clock strong{text-shadow:0 0 12px #78aaff99}
+body.room-game.room-frame .frame-now small{text-shadow:0 0 8px #5f95ffaa}
+body.room-game.room-frame .frame-now strong{text-shadow:0 0 14px #5f95ff88,0 2px 6px #000a}
+body.room-game.room-frame .frame-now-line{display:block;width:420px;height:2px;margin-top:6px;background:linear-gradient(90deg,#b9d6ff,#5f8fff66 60%,#5f8fff00)}
+body.room-game.room-frame #room-topic-label::before{content:"｜— ";color:#96beff}
+body.room-game.room-frame .frame-hashtag::before{content:"◆ ";color:#96beff;font-size:.8em}
+body.room-game.room-frame .frame-social::before{content:"✦ ";color:#96beff;font-size:.8em}
+body.room-game.room-frame .frame-tagline{text-shadow:0 0 10px #78aaff88}
+body.room-game.room-frame .frame-tagline::after{content:" ♡";color:#cfe0ff}
+@media(prefers-reduced-motion:reduce){body.room-game.room-frame .rf-framed .tw,body.room-game.room-frame .frame-clock b::before{animation:none}}
+/* ROOM_GAME_LAYOUT=wide (ROOM_BOXES.wide, operator 2026-10-19 没入型 案1, for Smash): the game at 1600x900 top-left under
+   this page (a hole in the dimmed room picture), no header and no overlay on the picture. Noa as a bust at the top of the
+   right-hand column, the AI disclosure, the chat and the ad under her; subtitles, goal and the answered comment in the
+   strip under the game. */
+:root:has(body.room-game.room-wide),body.room-game.room-wide{background:transparent}
+body.room-game.room-wide #canvas{background:transparent}
+body.room-game.room-wide #canvas::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(#050a18b8,#050a18b8),#0a1226 url(/models/room/nightroom.png) 0 0/1920px 1080px no-repeat;clip-path:path(evenodd,"M0 0H1920V1080H0Z M8 8H1608V908H8Z")}
+body.room-game.room-wide .rf-game{display:none}
+body.room-game.room-wide .rf-wide{display:block}
+body.room-game.room-wide #canvas #vs-frame{left:8px;top:8px;width:1600px;height:900px;border-radius:10px;background:transparent}
+body.room-game.room-wide #canvas #avatar{left:1540px;top:8px;width:393px;z-index:4}
+body.room-game.room-wide #room-topic-label{left:1136px;top:937px;font:700 17px/1 var(--rsans);color:var(--rgold);letter-spacing:1px}
+body.room-game.room-wide #room-topic-text{left:1260px;top:922px;width:336px;height:48px;padding:0;border-radius:0;background:none;box-shadow:none;font-size:22px}
+body.room-game.room-wide #canvas #ai-playing{right:auto;left:1620px;top:536px}
+body.room-game.room-wide #canvas #ai-playing .ai-pill{font-size:14px;padding:5px 12px}
+body.room-game.room-wide #canvas #vs-hud{left:24px;top:24px}
+body.room-game.room-wide #canvas #sponsor-card{left:1620px;top:880px;transform:scale(.60833)}
+body.room-game.room-wide .room-pr-label{left:1622px;top:856px;font-size:16px}
+body.room-game.room-wide .room-sel-head{left:1136px;top:1004px;font:700 17px/1 var(--rsans);letter-spacing:1px}
+body.room-game.room-wide .room-idle,body.room-game.room-wide #canvas #picked{left:1250px;top:988px;width:346px;height:50px}
+body.room-game.room-wide .room-chat-head{left:1620px;top:574px;width:292px;height:62px;gap:3px}
+body.room-game.room-wide .room-cheer{font-size:13px}
+/* The column is narrow: the Twitch note on its own line, the badges under it. */
+body.room-game.room-wide .room-cheer-row{flex-wrap:wrap;row-gap:3px}
+body.room-game.room-wide .room-cheer-row small{flex-basis:100%;font-size:11px}
+body.room-game.room-wide #canvas #caption-box{left:32px;top:924px;width:1060px;height:112px}
+body.room-game.room-wide #canvas #decision-hud{left:24px;top:560px;width:520px}
+body.room-game.room-wide #canvas #action-log{left:24px;top:668px;width:700px;height:32px}
+body.room-game.room-wide #canvas .drink-can{left:1850px;top:400px;width:50px;height:106px}
+body.room-game.room-wide #canvas .credit{left:16px;right:auto;bottom:4px;max-width:1090px;text-align:left;font-size:12px}

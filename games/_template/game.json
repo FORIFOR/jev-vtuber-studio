@@ -1,0 +1,35 @@
+{
+  "id": "my-game",
+  "title": "My Game",
+  "show": "show.mjs",
+  "controller": {
+    "about": "The program that plays the game with Jev (see docs/GAMES.md for what it must do)",
+    "command": ["python3", "-u", "play.py"],
+    "args": { "session": "--session", "seconds": "--seconds", "maxCalls": "--max-calls", "maxCost": "--max-cost" },
+    "extraArgs": [],
+    "audioArg": "--audio",
+    "logDir": "runs",
+    "logFile": "decisions.jsonl",
+    "choicePhases": [],
+    "costPerMinuteUsd": 0.035,
+    "costPerCallUsd": 0.000105,
+    "progress": {
+      "starting": "^connected",
+      "playing": "^run: ",
+      "restarting": "^run \\d+ ended",
+      "failed": "^failed:\\s*(.*)"
+    }
+  },
+  "capture": {
+    "appName": "My Game",
+    "windowTitle": "My Game",
+    "bundleId": "com.example.MyGame",
+    "cropTopPx": 56,
+    "audioVolumeDb": -14
+  },
+  "stage": {
+    "about": "Where this game's own HUD is, as fractions [x, y, w, h] of its picture; no overlay may cover it (docs/GAMES.md)",
+    "layout": "side",
+    "hud": []
+  }
+}

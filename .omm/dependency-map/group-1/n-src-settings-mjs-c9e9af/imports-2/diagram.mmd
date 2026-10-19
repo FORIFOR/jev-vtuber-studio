@@ -1,0 +1,12 @@
+graph TD
+    source["ソース\nsrc/settings.mjs"]
+    n-voice-router-mjs-a12943["./voice-router.mjs\nsrc/voice-router.mjs"]
+    source -->|"字句抽出: import／export"| n-voice-router-mjs-a12943
+    n-speech-director-mjs-efaa27["./speech-director.mjs\nsrc/speech-director.mjs"]
+    source -->|"字句抽出: import／export"| n-speech-director-mjs-efaa27
+    n-reaction-audio-mjs-0e2238["./reaction-audio.mjs\nsrc/reaction-audio.mjs"]
+    source -->|"字句抽出: import／export"| n-reaction-audio-mjs-0e2238
+    n-audio-bus-mjs-d297e0["./audio-bus.mjs\nsrc/audio-bus.mjs"]
+    source -->|"字句抽出: import／export"| n-audio-bus-mjs-d297e0
+    n-tts-adapters-mjs-fe5b43["./tts-adapters.mjs\nsrc/tts-adapters.mjs"]
+    source -->|"字句抽出: import／export"| n-tts-adapters-mjs-fe5b43

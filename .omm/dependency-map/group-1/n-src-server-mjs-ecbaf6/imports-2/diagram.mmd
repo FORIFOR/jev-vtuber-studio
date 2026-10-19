@@ -1,0 +1,18 @@
+graph TD
+    source["ソース\nsrc/server.mjs"]
+    n-node-url-d0cb3a["node:url\n外部・別名・未解決"]
+    source -->|"字句抽出: import／export"| n-node-url-d0cb3a
+    n-config-mjs-f9f8e1["./config.mjs\nsrc/config.mjs"]
+    source -->|"字句抽出: import／export"| n-config-mjs-f9f8e1
+    n-util-mjs-c035dc["./util.mjs\nsrc/util.mjs"]
+    source -->|"字句抽出: import／export"| n-util-mjs-c035dc
+    n-store-mjs-6caec8["./store.mjs\nsrc/store.mjs"]
+    source -->|"字句抽出: import／export"| n-store-mjs-6caec8
+    n-jev-mjs-0dca39["./jev.mjs\nsrc/jev.mjs"]
+    source -->|"字句抽出: import／export"| n-jev-mjs-0dca39
+    n-providers-mjs-f20ed0["./providers.mjs\nsrc/providers.mjs"]
+    source -->|"字句抽出: import／export"| n-providers-mjs-f20ed0
+    n-voice-routing-mjs-c5fb9a["./voice-routing.mjs\nsrc/voice-routing.mjs"]
+    source -->|"字句抽出: import／export"| n-voice-routing-mjs-c5fb9a
+    n-voice-router-mjs-a12943["./voice-router.mjs\nsrc/voice-router.mjs"]
+    source -->|"字句抽出: import／export"| n-voice-router-mjs-a12943

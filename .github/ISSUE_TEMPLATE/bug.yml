@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a reproducible problem without secrets.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include API keys, Control URLs, OAuth tokens or private comments."
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps and expected result
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: OS, Node, model, voice, OBS versions
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result and redacted logs
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Test scope
+      options:
+        - Fixed-script demo
+        - Real local rehearsal
+        - OBS local recording
+        - YouTube broadcast

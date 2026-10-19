@@ -1,0 +1,54 @@
+/* On-stream chat box and Noa's commands (OBS browser sources, 556x175 in the game scene; see src/obs.mjs). */
+html,body{margin:0;background:#0b1120;color:#fffaf0;font:16px/1.3 "Hiragino Sans",sans-serif;overflow:hidden;border-radius:12px}
+#chat-header{position:absolute;top:0;left:0;right:0;z-index:2;padding:4px 12px;font:700 12px sans-serif;letter-spacing:1px;color:#9fe0c8;background:#0b1120fa;border-bottom:1px solid #ffffff14;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#list{position:absolute;left:0;right:0;bottom:0;top:26px;padding:4px 0}
+.m{display:flex;gap:8px;align-items:baseline;padding:3px 12px;border-bottom:1px solid #ffffff0d}
+.s{flex:none;font:700 11px sans-serif;padding:1px 6px;border-radius:4px;color:#fff}.youtube .s{background:#e02424}.twitch .s{background:#9146ff}
+.n{flex:none;font-weight:700;font-size:14px}.youtube .n{color:#9fe0c8}.twitch .n{color:#c9a7ff}
+.t{overflow-wrap:anywhere}
+.actions #list{position:static;padding:0;top:auto}
+#h{padding:4px 12px 2px;font:700 12px sans-serif;letter-spacing:2px;color:#9fe0c8}
+.actions .m{display:grid;grid-template-columns:52px 26px 1fr;gap:6px;opacity:.6;white-space:nowrap}
+.actions .m:last-child{opacity:1;font-weight:700}.levelup{color:#ffd77a}.c{font:500 13px ui-monospace,Menlo,monospace;color:#9fb0d8}
+/* STAGE_THEME=room (#theme=room): no box of its own; the stage's frames draw the panel and the heading. Navy glass rows with a
+   champagne hairline, newest at the bottom, a gentle fade-in. Chat 464x284 (talk) / 424x182 (game); commands 780x36. */
+html:has(body.theme-room),body.theme-room{background:transparent;border-radius:0}
+body.theme-room{color:#f5f3ff;font:500 19px/1.4 "Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif}
+body.theme-room #chat-header{display:none}
+body.theme-room #list{position:absolute;inset:0;padding:0 2px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;overflow:hidden}
+body.theme-room .m{flex:none;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;padding:6px 12px 7px;border:0;border-radius:10px;background:linear-gradient(90deg,#0b1a3ad9,#0b1a3a8c);box-shadow:inset 0 0 0 1px #eed29c2e;animation:room-row .5s ease both}
+body.theme-room .s{display:inline-block;margin-right:7px;padding:2px 6px;font:700 11px/1.2 sans-serif;border-radius:4px;vertical-align:2px}
+body.theme-room .n{margin-right:8px;font-size:15px;color:#eed29c!important}
+body.theme-room .t{color:#f5f3ff}
+@media (max-height:220px){body.theme-room{font-size:17px}body.theme-room #list{gap:4px}body.theme-room .m{padding:4px 10px 5px;-webkit-line-clamp:2}body.theme-room .n{font-size:14px}}
+@keyframes room-row{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+body.theme-room.actions{display:flex;align-items:center;gap:12px;height:100vh;box-sizing:border-box;padding:0 14px;border-radius:18px;background:linear-gradient(90deg,#061228eb,#0c1a37cc);box-shadow:inset 0 0 0 1px #eed29c66;font-size:17px;line-height:1}
+body.theme-room.actions #h{flex:none;padding:0;font:400 15px/1 "Hiragino Mincho ProN","Yu Mincho",serif;letter-spacing:1px;color:#eed29c}
+body.theme-room.actions #list{position:static;inset:auto;flex:1;min-width:0;flex-direction:row;justify-content:flex-end;align-items:center;gap:18px;padding:0}
+body.theme-room.actions .m{display:flex;gap:6px;flex:none;padding:0;background:none;box-shadow:none;border:0;opacity:.6;white-space:nowrap;animation:room-row .4s ease both}
+body.theme-room.actions .m:last-child{opacity:1;font-weight:700}
+body.theme-room.actions .c{font-size:13px}
+@media(prefers-reduced-motion:reduce){body.theme-room .m{animation:none}}
+body.theme-room:not(.actions) #list{-webkit-mask-image:linear-gradient(transparent 0,#000 22px);mask-image:linear-gradient(transparent 0,#000 22px)}
+
+/* Operator 2026-10-10: a loud call to chat, plus the game's Twitch integration (chat reaches the game). */
+#chat-header{padding:6px 12px 5px;background:linear-gradient(90deg,#1b2442f7,#0b1120f7);border-bottom:1px solid #e9c77a66;white-space:normal}
+#chat-header b{display:block;font:800 19px sans-serif;letter-spacing:1px;color:#ffd978;text-shadow:0 0 10px #ffcf5a80,0 2px 3px #000c;animation:cheer 2.4s ease-in-out infinite}
+#chat-header small{display:block;font:600 11px sans-serif;letter-spacing:.5px;color:#c9b8ff;margin-top:1px}
+@keyframes cheer{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+/* The taller call above pushes the rows down; newest stay at the bottom, oldest scroll off the top. */
+body:not(.actions):not(.theme-room) #list{top:50px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+body:not(.actions):not(.theme-room) .m{flex:none}
+/* ROOM_GAME_LAYOUT=full: over the game, the newest rows strongest and older ones fading. */
+body.theme-room.fade #list{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 64px);mask-image:linear-gradient(to bottom,transparent 0,#000 64px)}
+/* filter, not opacity: the rows' entry animation (fill both) holds their opacity at 1 */
+body.theme-room.fade .m:nth-last-child(n+4){filter:opacity(.78)}body.theme-room.fade .m:nth-last-child(n+6){filter:opacity(.55)}body.theme-room.fade .m:nth-last-child(n+8){filter:opacity(.35)}
+/* ROOM_GAME_LAYOUT=frame (#style=card): rows inside the stage's LIVE CHAT panel: a coloured name over the text. */
+body.theme-room.card #list{gap:8px}
+body.theme-room.card .m{display:block;padding:0;border-radius:0;background:none;box-shadow:none;-webkit-line-clamp:3}
+body.theme-room.card .s{display:none}
+body.theme-room.card .n{display:block;margin:0 0 1px;font:700 14px/1.25 "Hiragino Kaku Gothic ProN","Hiragino Sans",sans-serif}
+body.theme-room.card .t{font-size:16px;line-height:1.35}
+body.theme-room.card .m:nth-child(4n+1) .n{color:#ff8cbe!important}body.theme-room.card .m:nth-child(4n+2) .n{color:#bea0ff!important}
+body.theme-room.card .m:nth-child(4n+3) .n{color:#ffc878!important}body.theme-room.card .m:nth-child(4n) .n{color:#8cdcff!important}
+body.theme-room.card #list{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 40px);mask-image:linear-gradient(to bottom,transparent 0,#000 40px)}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>ライブ操作 / Jev VTuber Studio</title>
+  <link rel="stylesheet" href="/control.css">
+</head>
+<body>
+<main class="lcp">
+  <header class="lcp-head"><h1>NOA STUDIO</h1><span id="lcp-live" class="lcp-live">● 停止中</span><span id="lcp-remaining"></span><a href="/">Studioへ ↗</a></header>
+  <p id="lcp-notice" class="lcp-notice" hidden></p>
+  <section class="lcp-row"><h2>🎤 声</h2><div class="lcp-buttons"><button data-voice="ai">AI</button><button data-voice="human">人間</button><button data-voice="none">無音</button></div><p id="lcp-voice-note" class="lcp-note"></p></section>
+  <section class="lcp-row"><h2>👂 聞くもの</h2><div class="lcp-buttons"><button data-listen="discord_first">通話優先</button><button data-listen="comments_first">コメント優先</button><button data-listen="both">両方</button><button data-listen="discord_only">通話だけ</button><button data-listen="comments">コメントだけ</button><button data-listen="muted">ミュート</button></div></section>
+  <section class="lcp-row"><h2>🎮 ゲーム</h2><div class="lcp-buttons"><button data-game="ai">AI</button><button data-game="human">人間</button><button data-game="off" class="lcp-danger" title="ゲームを止めます（2回押し）">OFF</button></div><p id="lcp-game-note" class="lcp-note"></p></section>
+  <section class="lcp-row"><h2>🎭 表情</h2><div class="lcp-buttons"><button data-avatar="auto">自動</button><button data-avatar="manual">手動</button></div><div id="lcp-faces" class="lcp-buttons lcp-faces"></div></section>
+  <section class="lcp-row lcp-status"><h2>入力の状態</h2><dl id="lcp-status"></dl></section>
+  <section class="lcp-row lcp-big"><button id="lcp-takeover" class="lcp-primary">TAKE OVER<small>人間が話す</small></button><button id="lcp-resume" class="lcp-primary">AI RESUME<small>AIが話す</small></button><button id="lcp-mute">MUTE NOA<small>ノアを黙らせる</small></button><button id="lcp-stop" class="lcp-danger">STOP ALL<small>緊急停止（2回押し）</small></button></section>
+  <section class="lcp-row"><h2>⌨️ ショートカット</h2><p class="lcp-note">この画面か Studio を開いている時に効きます。どのアプリが前面でも効かせるには <code>npm run hotkeys</code>（docs/CONTROL.md）。欄を押してからキーを押すと割り当てが変わります。</p><table id="lcp-keys"></table><div class="lcp-buttons"><button id="lcp-keys-save">保存</button><button id="lcp-keys-reset">初期設定に戻す</button></div></section>
+</main>
+<script type="module" src="/control.mjs"></script>
+</body>
+</html>

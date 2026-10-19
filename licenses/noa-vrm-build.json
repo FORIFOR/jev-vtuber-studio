@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "three": "0.186.1",
+    "@pixiv/three-vrm": "3.5.5",
+    "@pixiv/three-vrm-animation": "3.5.5",
+    "esbuild": "0.28.2"
+  },
+  "bundle": {
+    "file": "public/noa-vrm-avatar.mjs",
+    "bytes": 841316,
+    "sha256": "7d1850a5858d19e4c5d004471ae49d73db693a6365718e5ece9d3036f1bc1fc0"
+  },
+  "sources": {
+    "browser/avatar-vrm/ai-ring.mjs": "df7ab9502ec09b0aaff3dbc42487ba9be4540b63bd45863fb460d94c05eb1e37",
+    "browser/avatar-vrm/controls.mjs": "66ce07d189d9ee9a387d8c7176f78cf337a3193933480b924e61a64c753c4d2f",
+    "browser/avatar-vrm/expression-state.mjs": "cf494e072d14bbb5fa399526e96c88511bdce7fcb99149e6061da57d3b329e1d",
+    "browser/avatar-vrm/expressions.mjs": "3cb20b6eecdeaa90636cbce54d19f4ce3328e168c893047d45c08a0711359144",
+    "browser/avatar-vrm/face-fit.mjs": "fce8b6c911875453f77afcda097d3beffda1ce0820f0af6f3531e0e4e5779f27",
+    "browser/avatar-vrm/framing.mjs": "f99737c55d0c3bdcd176d67fa2dc31f5b84b5cc587d877804cf847bd61669d89",
+    "browser/avatar-vrm/material-finish.mjs": "dfc79631d88151aa908a9f4996b60450ccb0190a2f29aa9a4a99c57603b709e1",
+    "browser/avatar-vrm/motion-fit.mjs": "5a65569f72ee4ec2ce4e2d9ddaa15a1effc0ca616e569433b5a0eb892ece9ad1",
+    "browser/avatar-vrm/noa-vrm-avatar.mjs": "d71cf88cad882c744dc8fcd80be8a1f9d42c9cb37ba515284b724c0052234ce9",
+    "browser/avatar-vrm/outfits.mjs": "545099037ed3f3ddeb5611df99d1b5972f3f66098e39394e6848172d0d4ba179",
+    "browser/avatar-vrm/performance.mjs": "317d9e3116237b57ae15898208f61161db17c61e3d5950822809d29fc8bf8518",
+    "browser/avatar-vrm/physics-fit.mjs": "bb9cd670bb1eda3420da067108e5fe6be66a63841e6f2879ad5b9fd015828a1b",
+    "browser/avatar-vrm/spring-step.mjs": "3fb5f70b76b4892d9ccec64887e709565c0e63b88047ae43aeea2d3682343066",
+    "public/avatar-outfits.mjs": "88bf497082e2939edc1d7d8382e352979abd30b7242e873daacb72065073803b",
+    "public/avatar-rig.mjs": "5500d2553f474abf91533bf24e4a7ee8cfb911c1c8dc204b830854a459d033da",
+    "public/voice-acting.mjs": "b53fa3fd3a9c5b420c3b5158b8d49375b9ba50a6eceec6eeec09ba2320697258"
+  }
+}

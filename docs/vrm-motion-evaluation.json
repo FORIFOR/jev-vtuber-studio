@@ -1,0 +1,1240 @@
+{
+  "version": "4.86.0",
+  "sha256": "4496063f39acd003a324c6a4c511b05d3bb0d06bf1ad04df0221ba59a1f4fda1",
+  "modelBytes": 53143660,
+  "generatedAt": "2026-09-29T19:45:57.971Z",
+  "runtimeSources": {
+    "browser/avatar-vrm/performance.mjs": "317d9e3116237b57ae15898208f61161db17c61e3d5950822809d29fc8bf8518",
+    "browser/avatar-vrm/motion-fit.mjs": "5a65569f72ee4ec2ce4e2d9ddaa15a1effc0ca616e569433b5a0eb892ece9ad1",
+    "browser/avatar-vrm/spring-step.mjs": "3fb5f70b76b4892d9ccec64887e709565c0e63b88047ae43aeea2d3682343066",
+    "browser/avatar-vrm/controls.mjs": "bdcbaa01b8a563dd7522008e42cd260e853d189a2989475e398a5560ea4a63ef",
+    "browser/avatar-vrm/physics-fit.mjs": "bb9cd670bb1eda3420da067108e5fe6be66a63841e6f2879ad5b9fd015828a1b"
+  },
+  "motions": {
+    "idle": {
+      "file": "rb-idle.vrma",
+      "sha256": "f698f6ea045533ab7475f7d512ea76c904f4a88b6e3645256f70ae532dd79b40"
+    },
+    "nod": {
+      "file": "rb-nod.vrma",
+      "sha256": "1c73e142305ae33e356a185145c3bf482d8fcda5057f632e60dd5ecda3b8c726"
+    },
+    "wave": {
+      "file": "rb-wave.vrma",
+      "sha256": "8bd33d84e90c0243987924c2f27d826f0b3343cfa8d1607a4e2f0bb9ce8af643"
+    },
+    "think": {
+      "file": "rb-listen-2.vrma",
+      "sha256": "3a7c6bc77fe9531ae960b9446b60ace26e5b1036768c1c93f040a90b22329eb7"
+    },
+    "surprise": {
+      "file": "rb-shrug.vrma",
+      "sha256": "40db0f7c6d61200136c3a48f77d8cede1557cc62e468f5aca46cbd80e1da5f47"
+    },
+    "explain": {
+      "file": "rb-idle-talking.vrma",
+      "sha256": "3b1c1155dfac93d4d4d3a44deecc17420cd191cbec9b68e795f19bc6d05e0e6e"
+    }
+  },
+  "method": "Actual VRM hierarchy, humanoid transforms, spring parameters and colliders extracted from the shipped GLB. Actual hash-verified VRMA parsed by the pinned production library, production prepareMotionClip and PerformanceController, production fixed-step spring integrator. No substitute meshes, synthetic clips, browser requests or mocked engine.",
+  "inputs": "All six motions at 30/60/120 fps; five-second warm-up, normal completion and 45% interruption, eight-second stopped-idle recovery. Idle head turn uses a +/-30-degree Jev control input mapped by production deriveControls. Idle animation is paused during the recovery measurement so the baseline is stationary.",
+  "limitations": [
+    "No WebGL rendering or geometry/material clearance evaluation.",
+    "Facial expressions, real speech synchronization and OBS are not assessed.",
+    "Rig-only simulation verifies numerical motion, not subjective hair quality or superiority to other VTubers."
+  ],
+  "passed": true,
+  "completedRuns": 33,
+  "expectedRuns": 33,
+  "runs": [
+    {
+      "fps": 30,
+      "gesture": "idle",
+      "interrupted": false,
+      "clip": "rb-idle.vrma",
+      "simulatedFrames": 450,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 40.18165130485511,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 2.220446049250313e-16,
+      "automaticReturn": null
+    },
+    {
+      "fps": 30,
+      "gesture": "nod",
+      "interrupted": false,
+      "clip": "rb-nod.vrma",
+      "simulatedFrames": 463,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 19.55989249621329,
+      "eightSecondResidualDegrees": 0.0000017075472925031877,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.1920929310349493e-7,
+      "automaticReturn": true
+    },
+    {
+      "fps": 30,
+      "gesture": "nod",
+      "interrupted": true,
+      "clip": "rb-nod.vrma",
+      "simulatedFrames": 416,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 17.755561896578488,
+      "eightSecondResidualDegrees": 0.0000029575586669421963,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 1.5927979601926268e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 30,
+      "gesture": "wave",
+      "interrupted": false,
+      "clip": "rb-wave.vrma",
+      "simulatedFrames": 562,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 69.72130048172413,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 9.786747490192482e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 30,
+      "gesture": "wave",
+      "interrupted": true,
+      "clip": "rb-wave.vrma",
+      "simulatedFrames": 461,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 45.68935018549339,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 9.786747490192482e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 30,
+      "gesture": "think",
+      "interrupted": false,
+      "clip": "rb-listen-2.vrma",
+      "simulatedFrames": 566,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 23.02813402749986,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 7.275246083349174e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 30,
+      "gesture": "think",
+      "interrupted": true,
+      "clip": "rb-listen-2.vrma",
+      "simulatedFrames": 463,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 17.819816309373785,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 3.19010694527222e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 30,
+      "gesture": "surprise",
+      "interrupted": false,
+      "clip": "rb-shrug.vrma",
+      "simulatedFrames": 457,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 55.925431929634414,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.9959159769378232e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 30,
+      "gesture": "surprise",
+      "interrupted": true,
+      "clip": "rb-shrug.vrma",
+      "simulatedFrames": 414,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 33.500162758996964,
+      "eightSecondResidualDegrees": 0.0000017075472925031877,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 2.563465995031322e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 30,
+      "gesture": "explain",
+      "interrupted": false,
+      "clip": "rb-idle-talking.vrma",
+      "simulatedFrames": 630,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 30.716556618577194,
+      "eightSecondResidualDegrees": 0.0000029575586669421963,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.5254560559174735e-7,
+      "automaticReturn": true
+    },
+    {
+      "fps": 30,
+      "gesture": "explain",
+      "interrupted": true,
+      "clip": "rb-idle-talking.vrma",
+      "simulatedFrames": 492,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 30.716556618577194,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.5254560559174735e-7,
+      "automaticReturn": null
+    },
+    {
+      "fps": 60,
+      "gesture": "idle",
+      "interrupted": false,
+      "clip": "rb-idle.vrma",
+      "simulatedFrames": 900,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 40.98958279950738,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 2.220446049250313e-16,
+      "automaticReturn": null
+    },
+    {
+      "fps": 60,
+      "gesture": "nod",
+      "interrupted": false,
+      "clip": "rb-nod.vrma",
+      "simulatedFrames": 926,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 19.696236756625062,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.1920929310349493e-7,
+      "automaticReturn": true
+    },
+    {
+      "fps": 60,
+      "gesture": "nod",
+      "interrupted": true,
+      "clip": "rb-nod.vrma",
+      "simulatedFrames": 832,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 18.361110626499446,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.7391759810081453e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 60,
+      "gesture": "wave",
+      "interrupted": false,
+      "clip": "rb-wave.vrma",
+      "simulatedFrames": 1124,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 69.71431022877674,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 9.786747501294712e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 60,
+      "gesture": "wave",
+      "interrupted": true,
+      "clip": "rb-wave.vrma",
+      "simulatedFrames": 921,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 50.2882272928228,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 9.786747501294712e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 60,
+      "gesture": "think",
+      "interrupted": false,
+      "clip": "rb-listen-2.vrma",
+      "simulatedFrames": 1131,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 23.335047853022825,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 7.275246083349174e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 60,
+      "gesture": "think",
+      "interrupted": true,
+      "clip": "rb-listen-2.vrma",
+      "simulatedFrames": 925,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 18.134512280359324,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 2.6647262285628415e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 60,
+      "gesture": "surprise",
+      "interrupted": false,
+      "clip": "rb-shrug.vrma",
+      "simulatedFrames": 914,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 54.60234591285812,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.9959159769378232e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 60,
+      "gesture": "surprise",
+      "interrupted": true,
+      "clip": "rb-shrug.vrma",
+      "simulatedFrames": 827,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 31.89395085760195,
+      "eightSecondResidualDegrees": 0.0000017075472925031877,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 2.601667792312412e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 60,
+      "gesture": "explain",
+      "interrupted": false,
+      "clip": "rb-idle-talking.vrma",
+      "simulatedFrames": 1260,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 30.44527662520456,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.5254560559174735e-7,
+      "automaticReturn": true
+    },
+    {
+      "fps": 60,
+      "gesture": "explain",
+      "interrupted": true,
+      "clip": "rb-idle-talking.vrma",
+      "simulatedFrames": 983,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 30.44527662520456,
+      "eightSecondResidualDegrees": 0.0000029575586669421963,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.5254560559174735e-7,
+      "automaticReturn": null
+    },
+    {
+      "fps": 120,
+      "gesture": "idle",
+      "interrupted": false,
+      "clip": "rb-idle.vrma",
+      "simulatedFrames": 1800,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 41.039659700605064,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 4.440892098500626e-16,
+      "automaticReturn": null
+    },
+    {
+      "fps": 120,
+      "gesture": "nod",
+      "interrupted": false,
+      "clip": "rb-nod.vrma",
+      "simulatedFrames": 1851,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 19.678271685027976,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.1920929310349493e-7,
+      "automaticReturn": true
+    },
+    {
+      "fps": 120,
+      "gesture": "nod",
+      "interrupted": true,
+      "clip": "rb-nod.vrma",
+      "simulatedFrames": 1664,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 18.480191856710206,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 1.814690941959185e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 120,
+      "gesture": "wave",
+      "interrupted": false,
+      "clip": "rb-wave.vrma",
+      "simulatedFrames": 2247,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 69.95913090325732,
+      "eightSecondResidualDegrees": 0.0000017075472925031877,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 9.786747490192482e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 120,
+      "gesture": "wave",
+      "interrupted": true,
+      "clip": "rb-wave.vrma",
+      "simulatedFrames": 1842,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 50.75017323260928,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 9.786747490192482e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 120,
+      "gesture": "think",
+      "interrupted": false,
+      "clip": "rb-listen-2.vrma",
+      "simulatedFrames": 2262,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 23.38526435841908,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 7.275246083349174e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 120,
+      "gesture": "think",
+      "interrupted": true,
+      "clip": "rb-listen-2.vrma",
+      "simulatedFrames": 1849,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 18.009096363180266,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 2.755339534310508e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 120,
+      "gesture": "surprise",
+      "interrupted": false,
+      "clip": "rb-shrug.vrma",
+      "simulatedFrames": 1828,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 53.97882257086882,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.9959159769378232e-8,
+      "automaticReturn": true
+    },
+    {
+      "fps": 120,
+      "gesture": "surprise",
+      "interrupted": true,
+      "clip": "rb-shrug.vrma",
+      "simulatedFrames": 1654,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 31.618190789107523,
+      "eightSecondResidualDegrees": 0.0000017075472925031877,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 0,
+      "maxQuaternionError": 2.7151955350745993e-8,
+      "automaticReturn": null
+    },
+    {
+      "fps": 120,
+      "gesture": "explain",
+      "interrupted": false,
+      "clip": "rb-idle-talking.vrma",
+      "simulatedFrames": 2519,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 30.707815394197517,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.5254560548072504e-7,
+      "automaticReturn": true
+    },
+    {
+      "fps": 120,
+      "gesture": "explain",
+      "interrupted": true,
+      "clip": "rb-idle-talking.vrma",
+      "simulatedFrames": 1965,
+      "physicsAdjustments": [
+        {
+          "bone": "J_Sec_Hair1_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair2_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair3_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        },
+        {
+          "bone": "J_Sec_Hair4_03",
+          "previousGravityPower": 0,
+          "gravityPower": 0.02
+        }
+      ],
+      "peakHairDegrees": 30.707815394197517,
+      "eightSecondResidualDegrees": 0.0000024148365394514667,
+      "humanoidRestRotationResidualDegrees": 0.0000034150945850063755,
+      "humanoidRestPositionResidualM": 0,
+      "maxHorizontalRootDriftM": 8.673617379884035e-19,
+      "maxQuaternionError": 1.5254560548072504e-7,
+      "automaticReturn": null
+    }
+  ],
+  "failures": []
+}

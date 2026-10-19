@@ -1,0 +1,74 @@
+{
+  "repo": "FORIFOR/Jev_VTuber_Studio",
+  "branch": "main",
+  "tree_sha": "a6aa1b755dc7462fd026aba33179dd2a0c5e21da",
+  "tree_files": 188,
+  "read_files": [
+    {
+      "path": "README.md",
+      "sha": "48135bf28f140573392a5619d69b35f121a37807"
+    },
+    {
+      "path": "package.json",
+      "sha": "dcc7bbb05d3d7e4174fc6564fe538819f29f0ca8"
+    },
+    {
+      "path": "src/server.mjs",
+      "sha": "f0f6cb1305a2e27961456cce635ff8cc8a9529e5"
+    },
+    {
+      "path": "start.sh",
+      "sha": "9705ac907af4deaf43f602420581e263ad1adbdb"
+    },
+    {
+      "path": "src/remote-control.mjs",
+      "sha": "684870b443e33a1b93d1d4c448534fc8be055477"
+    },
+    {
+      "path": "src/remote-server.mjs",
+      "sha": "cb5364174e34da11f4211148600d31fd2692a29a"
+    },
+    {
+      "path": "src/talk-engine.mjs",
+      "sha": "274dbcd291eefe7274e566e1304efee7d78eeb81"
+    },
+    {
+      "path": "src/settings.mjs",
+      "sha": "c3001e9f3635be9539bac0a59a3a6521bf4b62db"
+    },
+    {
+      "path": "src/util.mjs",
+      "sha": "45130e9429f300d2cceb0c04d8a5dd151d108185"
+    },
+    {
+      "path": "src/store.mjs",
+      "sha": "1db527a8d4de8c00d27dc5698cdec192a5f3be24"
+    },
+    {
+      "path": "src/jev.mjs",
+      "sha": "5fa2d3ca2a6be8cd5d2d7fa61070ff68c695a502"
+    },
+    {
+      "path": "src/providers.mjs",
+      "sha": "903bb8de7fe8d7df7c5c9313bc5b2ce420aa860b"
+    },
+    {
+      "path": "src/voice-routing.mjs",
+      "sha": "d3b2175eadf478b9356ce60e11565fa2327048e6"
+    },
+    {
+      "path": "src/voice-router.mjs",
+      "sha": "e5a8e196631c97d8b0349a74791c4799c0a079bc"
+    },
+    {
+      "path": "src/reaction-audio.mjs",
+      "sha": "4ddee8a9ed116ba3b9778432ce7349940398fe21"
+    },
+    {
+      "path": "src/engine.mjs",
+      "sha": "a0a5952ee3d40bfbaadb91abb8c142b8bce4a7b0"
+    }
+  ],
+  "not_read_count": 172,
+  "scope": "initial entry-point and direct-import analysis; not exhaustive semantic scan"
+}

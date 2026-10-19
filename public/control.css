@@ -1,0 +1,19 @@
+:root{--bg:#0b1020;--panel:#141a2e;--ink:#eef2ff;--dim:#9aa6c6;--on:#3fbf8f;--warn:#e0a03a;--danger:#d64545;--line:#ffffff1f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Hiragino Kaku Gothic ProN","Hiragino Sans",system-ui,sans-serif}
+.lcp{max-width:960px;margin:0 auto;padding:16px}
+.lcp-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:12px}.lcp-head h1{font-size:20px;letter-spacing:.12em;margin:0}.lcp-head a{margin-left:auto;color:var(--dim)}
+.lcp-live{font-weight:800;color:var(--dim)}.lcp-live.on{color:#ff5a6e}
+.lcp-notice{background:#3a2a10;border:1px solid var(--warn);border-radius:10px;padding:8px 12px}
+.lcp-row{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0}
+.lcp-row h2{font-size:15px;margin:0 0 8px;color:var(--dim)}
+.lcp-buttons{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-weight:700;color:var(--ink);background:#1f2742;border:1px solid var(--line);border-radius:10px;padding:10px 16px;min-width:88px;cursor:pointer}
+button:disabled{opacity:.45;cursor:default}button.on{background:var(--on);color:#06140e;border-color:var(--on)}
+button.lcp-danger{border-color:var(--danger)}button.lcp-danger.armed{background:var(--danger)}
+.lcp-big{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.lcp-big button{padding:18px 8px;font-size:18px}.lcp-big small{display:block;font-size:12px;font-weight:400;color:var(--dim)}
+.lcp-primary{border-color:var(--on)}
+.lcp-faces{margin-top:8px}.lcp-faces button{min-width:0;padding:6px 10px;font-weight:400}
+.lcp-note{margin:6px 0 0;color:var(--dim);font-size:13px}
+.lcp-status dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}.lcp-status dt{color:var(--dim)}.lcp-status dd{margin:0}
+#lcp-keys{border-collapse:collapse;margin:8px 0}#lcp-keys td{padding:4px 8px;border-bottom:1px solid var(--line)}#lcp-keys input{width:140px;font:inherit;background:#0e1426;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:4px 6px}
+@media(max-width:640px){.lcp-big{grid-template-columns:repeat(2,1fr)}}

@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0-rc.2",
+  "http": {
+    "/healthz": {
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    },
+    "/": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    "/setup": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    "/stage": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    "/setup.mjs": {
+      "status": 200,
+      "contentType": "text/javascript; charset=utf-8"
+    }
+  },
+  "browser": {
+    "status": "not_verified",
+    "normalNavigation": false,
+    "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:19387/setup#admin=[redacted]\nCall log:\n  - navigating to \"http://127.0.0.1:19387/setup#admin=[redacted]\", waiting until \"networkidle\"\n",
+    "policyChanged": false
+  }
+}

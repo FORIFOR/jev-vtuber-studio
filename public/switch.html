@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Switchをつなぐ / Jev VTuber Studio</title>
+  <link rel="stylesheet" href="/switch.css">
+</head>
+<body>
+<main class="switch-shell">
+  <header class="topbar"><a class="brand" href="/">Jev <span>VTUBER STUDIO</span></a><a href="/setup">設定へ戻る <span aria-hidden="true">↗</span></a></header>
+  <section class="intro" aria-labelledby="page-title"><p class="eyebrow">SWITCH × STUDIO</p><h1 id="page-title">つないで、映して、<br>音まで確かめる。</h1><p>UGREENなどのキャプチャー機器を使うための簡単設定。<br class="desktop-break">OBSの専用シーンを作り、30秒のローカル録画で確認します。</p><span class="local-badge">このページは接続確認用です</span></section>
+  <section id="locked" class="card" hidden aria-labelledby="lock-title"><h2 id="lock-title">Studioに接続</h2><p>管理URLから開くか、管理キーを入力してください。</p><form id="unlock"><label for="admin-key">管理キー</label><div class="unlock-row"><input id="admin-key" type="password" autocomplete="off" required><button type="submit" class="primary">接続する</button></div></form></section>
+  <p id="notice" class="notice" role="status" aria-live="polite">接続状態を確認しています。</p>
+  <div id="switch-app" hidden>
+    <nav class="step-nav" aria-label="接続手順"><a href="#wiring">01 接続</a><a href="#devices">02 検出・選択</a><a href="#prepare">03 OBS</a><a href="#preview">04 映像</a><a href="#recording">05 録画</a><a href="#review">06 確認</a></nav>
+    <section class="card" id="wiring" aria-labelledby="wiring-title"><div class="section-heading"><span class="step-number">01</span><div><p class="eyebrow">CONNECT</p><h2 id="wiring-title">まずは、この順番で接続</h2></div></div>
+      <ol class="connection-diagram" aria-label="SwitchのドックからHDMIでキャプチャー機器へ、USBでこのMacへ接続"><li><span class="device-icon" aria-hidden="true">01</span><strong>Switchのドック</strong><small>電源を接続し、TV出力</small></li><li class="cable" aria-hidden="true"><span>HDMI</span><b>→</b></li><li><span class="device-icon" aria-hidden="true">02</span><strong>UGREENなど</strong><small>HDMI INへ接続</small></li><li class="cable" aria-hidden="true"><span>USB</span><b>→</b></li><li><span class="device-icon" aria-hidden="true">03</span><strong>このMac</strong><small>OBSを起動</small></li></ol>
+      <p class="helper">TV出力に対応したSwitchとドックを使います。キャプチャー機器にHDMI OUTがある場合は、そこからテレビへ接続できます。</p>
+    </section>
+    <section class="card" id="devices" aria-labelledby="devices-title"><div class="section-heading"><span class="step-number">02</span><div><p class="eyebrow">CHOOSE DEVICES</p><h2 id="devices-title">映像と音声の入口を選ぶ</h2></div></div>
+      <p>接続した機器の名前を確認して選びます。内蔵カメラや内蔵マイクは自動で選びません。</p>
+      <button id="detect" type="button" class="secondary">デバイスを探す</button><p id="device-state" class="inline-state" aria-live="polite">まだ検出していません。</p>
+      <div id="device-help" class="help-box" hidden></div>
+      <div class="field-grid"><label for="video-device">映像デバイス<select id="video-device" disabled><option value="">検出してから選択</option></select></label><label for="audio-device">音声デバイス<select id="audio-device" disabled><option value="">検出してから選択</option></select></label></div>
+      <label for="video-preset">映像の取り込み方法<select id="video-preset" disabled><option value="">映像デバイスを選択</option></select></label><p id="preset-help" class="helper">機器が報告した対応モードから選択します。</p>
+      <details><summary>機器が見つからない・映像が出ない場合</summary><p>Switchとドックの電源、HDMI IN、USBケーブルの接続を確認してください。OBSにカメラ・マイクの権限が必要な場合は、macOSの「システム設定 → プライバシーとセキュリティ」でOBSを許可し、再検出してください。</p></details>
+    </section>
+    <section class="card" id="prepare" aria-labelledby="prepare-title"><div class="section-heading"><span class="step-number">03</span><div><p class="eyebrow">PREPARE OBS</p><h2 id="prepare-title">Switch用のシーンを準備</h2></div></div>
+      <p>選んだ映像・音声で、OBSに専用シーンを用意します。</p><div class="status-row"><span>OBS</span><strong id="obs-state">確認中</strong></div><p id="selection-summary" class="helper">映像・音声・プリセットを選択してください。</p>
+      <button id="prepare-scene" type="button" class="primary" disabled>OBS専用シーンを準備</button><p id="prepare-state" class="inline-state" aria-live="polite">未準備</p>
+    </section>
+    <section class="card" id="preview" aria-labelledby="preview-title"><div class="section-heading"><span class="step-number">04</span><div><p class="eyebrow">CHECK PICTURE</p><h2 id="preview-title">Switchの画面が映るか確認</h2></div></div>
+      <p>ゲームやホーム画面を動かしてから、静止画を更新してください。</p><div class="preview-frame"><img id="preview-image" alt="OBSのSwitch専用シーンの静止画" hidden><p id="preview-placeholder">シーンの準備後に表示できます</p></div><div class="preview-actions"><button id="refresh-preview" type="button" class="secondary" disabled>プレビュー静止画を更新</button><p id="preview-state" class="helper" aria-live="polite">自動更新はしません。</p></div>
+    </section>
+    <section class="card" id="recording" aria-labelledby="recording-title"><div class="section-heading"><span class="step-number">05</span><div><p class="eyebrow">LOCAL RECORDING</p><h2 id="recording-title">30秒録画して、音も確かめる</h2></div></div>
+      <p>Switchで音の出る操作をしてください。録画中はこの画面で状態を確認できます。</p><div class="record-panel"><span id="record-light" aria-hidden="true"></span><div><strong id="record-state">録画状態を確認しています</strong><p id="record-detail">シーンを準備してから開始できます。</p></div><span id="record-countdown" aria-live="off"></span></div>
+      <div class="button-row"><button id="start-recording" type="button" class="primary" disabled>30秒のローカル録画を開始</button><button id="stop-recording" type="button" class="secondary" disabled>この確認録画を停止</button><button id="recheck-recording" type="button" class="secondary" hidden disabled>OBSで停止を確認したので再確認</button><button id="refresh-status" type="button" class="quiet">状態を更新</button></div>
+      <div id="record-result" class="help-box" hidden><strong>録画を保存しました</strong><p id="record-path"></p><p>OBSの「ファイル → 録画を表示」から開いて、映像と音声を確認してください。</p></div>
+    </section>
+    <section class="card" id="review" aria-labelledby="review-title"><div class="section-heading"><span class="step-number">06</span><div><p class="eyebrow">WATCH & LISTEN</p><h2 id="review-title">録画を見て、3つを確認</h2></div></div>
+      <fieldset id="review-checks" disabled><legend>自分の目と耳で確認してください</legend><label class="check"><input id="check-video" type="checkbox"><span>Switchの映像が動き、途切れや大きな音ズレがない</span></label><label class="check"><input id="check-audio" type="checkbox"><span>ゲーム音が聞こえる</span></label><label class="check"><input id="check-duplicate" type="checkbox"><span>音が二重に聞こえない</span></label></fieldset>
+      <p id="review-state" class="review-state" aria-live="polite">録画が完了すると、確認項目を使えます。</p><p class="helper">30秒は接続の確認です。本番前には、使う構成全体で長めのローカル録画も確認してください。</p>
+    </section>
+  </div>
+  <footer><span>JEV VTUBER STUDIO</span><a href="/">スタジオへ戻る ↗</a></footer>
+</main>
+<script type="module" src="/switch.mjs"></script>
+</body>
+</html>

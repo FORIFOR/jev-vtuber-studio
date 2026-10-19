@@ -1,0 +1,6 @@
+graph TD
+    source["ソース\nsrc/remote-control.mjs"]
+    n-node-crypto-c7dfc5["node:crypto\n外部・別名・未解決"]
+    source -->|"字句抽出: import／export"| n-node-crypto-c7dfc5
+    n-util-mjs-c035dc["./util.mjs\nsrc/util.mjs"]
+    source -->|"字句抽出: import／export"| n-util-mjs-c035dc

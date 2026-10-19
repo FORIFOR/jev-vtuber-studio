@@ -1,0 +1,64 @@
+{
+  "id": "vampire-survivors",
+  "title": "Vampire Survivors",
+  "show": "../../src/vampire-show.mjs",
+  "controller": {
+    "about": "jev-vampire-survivors: launches the game, walks the menus, plays with Jev, level-ups/chests, restarts after a game over",
+    "command": [
+      "python3",
+      "-u",
+      "tools/auto_session.py"
+    ],
+    "args": {
+      "session": "--session",
+      "seconds": "--seconds",
+      "maxCalls": "--max-calls",
+      "maxCost": "--max-cost",
+      "character": "--character",
+      "stage": "--stage"
+    },
+    "extraArgs": [
+      "--levelup-pause",
+      "5",
+      "--max-runs",
+      "0",
+      "--run-game-seconds",
+      "86400",
+      "--stage-advance",
+      "runs"
+    ],
+    "audioArg": "--audio",
+    "logDir": "runs",
+    "costPerMinuteUsd": 0.035,
+    "costPerCallUsd": 0.000105,
+    "progress": {
+      "starting": "^Bridge is up",
+      "playing": "^run: ",
+      "restarting": "^run \\d+ ended \\(gameover\\)",
+      "failed": "^auto_session failed:\\s*(.*)",
+      "slow": "^could not confirm a windowed game"
+    },
+    "logFile": "decisions.jsonl",
+    "choicePhases": [
+      "levelup",
+      "chest"
+    ],
+    "env": {
+      "NOA_LOCAL_CHOOSER": "1",
+      "NOA_GEM_FIELD": "1", "NOA_BOSS_HUNT": "1",
+      "NOA_SEEK": "ROSARY", "NOA_SEEK_HOLD": "2.0", "NOA_SEEK_WINDOWS": "0-60,270-310,570-610,870-910",
+      "NOA_TWITCH_CHANNEL": "hoshiai_noa"
+    }
+  },
+  "capture": {
+    "appName": "Vampire Survivors",
+    "windowTitle": "Vampire Survivors",
+    "bundleId": "com.poncle.VampireSurvivors",
+    "cropTopPx": 28
+  },
+  "stage": {
+    "about": "HUD: the top strip (XP bar, timer, weapons, kills, gold); the player stays at the centre",
+    "layout": "frame",
+    "hud": [[0, 0, 1, 0.12], [0.4, 0.33, 0.2, 0.34]]
+  }
+}

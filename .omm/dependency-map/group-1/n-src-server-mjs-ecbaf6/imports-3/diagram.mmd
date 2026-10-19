@@ -1,0 +1,16 @@
+graph TD
+    source["ソース\nsrc/server.mjs"]
+    n-reaction-audio-mjs-0e2238["./reaction-audio.mjs\nsrc/reaction-audio.mjs"]
+    source -->|"字句抽出: import／export"| n-reaction-audio-mjs-0e2238
+    n-engine-mjs-4b278b["./engine.mjs\nsrc/engine.mjs"]
+    source -->|"字句抽出: import／export"| n-engine-mjs-4b278b
+    n-obs-mjs-31928f["./obs.mjs\nsrc/obs.mjs"]
+    source -->|"字句抽出: import／export"| n-obs-mjs-31928f
+    n-vts-mjs-09e764["./vts.mjs\nsrc/vts.mjs"]
+    source -->|"字句抽出: import／export"| n-vts-mjs-09e764
+    n-youtube-mjs-1df363["./youtube.mjs\nsrc/youtube.mjs"]
+    source -->|"字句抽出: import／export"| n-youtube-mjs-1df363
+    n-show-logger-mjs-1ee80e["./show-logger.mjs\nsrc/show-logger.mjs"]
+    source -->|"字句抽出: import／export"| n-show-logger-mjs-1ee80e
+    n-public-avatar-rig-mjs-66f0d0["../public/avatar-rig.mjs\npublic/avatar-rig.mjs"]
+    source -->|"字句抽出: import／export"| n-public-avatar-rig-mjs-66f0d0

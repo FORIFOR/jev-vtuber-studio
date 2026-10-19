@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0d1214"><meta name="color-scheme" content="dark"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Jev Remote">
+<title>Jev Remote — 配信リモコン</title><link rel="manifest" href="/mobile/manifest.webmanifest"><link rel="icon" href="/mobile/icon.svg"><link rel="stylesheet" href="/mobile/style.css"></head>
+<body><main><header><span class="brand">j<span>·</span></span><div>VTUBER STUDIO<small>PRIVATE REMOTE</small></div><span id="network" class="badge">接続中</span></header>
+<section class="intro"><p class="eyebrow">YOUR SHOW, FROM ANYWHERE</p><h1>ここから、<br>番組をはじめよう。</h1><p>配信はPCに任せて。<br>この画面は閉じても、番組は続きます。</p></section>
+<section class="status-card" aria-live="polite"><div class="card-head"><span id="state-dot" class="dot"></span><strong id="state-label">接続を確認しています</strong><span id="remaining">—</span></div>
+<h2 id="title">あなたの雑談番組</h2><p id="topic">PC側の状態を取得しています。</p><dl><div><dt>OBSの送出</dt><dd id="obs">未確認</dd></div><div><dt>PCの音声</dt><dd id="audio">未確認</dd></div><div><dt>遠隔開始の許可</dt><dd id="armed">未確認</dd></div></dl>
+<p id="caption" class="caption" hidden></p><a id="watch" target="_blank" rel="noopener noreferrer" hidden>YouTubeで実際の配信を確認 ↗</a></section>
+<p id="message" role="status">Tailscale接続とPCの準備状態を確認しています。</p>
+<div class="actions"><button id="start" class="primary" disabled>配信を開始</button><button id="check" class="secondary" disabled>開始できるか確認</button><button id="stop" class="secondary" disabled>配信を停止</button></div>
+<button id="panic" class="danger" disabled>緊急停止</button><p class="helper">緊急停止後の解除はPCで行います。通信できない場合は停止命令も届きません。</p>
+<details><summary>「すぐ開始」できる条件</summary><p>PC、Studio、OBS、会話モデル、VOICEVOXが起動済みで、PC側で試聴・録画確認と遠隔開始の許可が済んでいる必要があります。スリープ・電源OFFのPCは起動できません。</p><p>この画面の「OBS送出中」は配信サービスでの公開開始を保証しません。視聴ページも確認してください。</p></details>
+<footer>HTTPS · PRIVATE NETWORK · NO PHONE RENDERING</footer>
+<dialog id="confirm-dialog"><form method="dialog"><p class="eyebrow">READY TO GO ON AIR?</p><h2>この番組を開始しますか？</h2><p id="confirm-target"></p><p>PCで確認したOBSの送信先に配信します。公開範囲は配信サービス側の設定に従います。API利用料が発生する場合があります。</p><div class="actions"><button value="cancel" class="secondary">戻る</button><button value="start" class="primary">確認して開始</button></div></form></dialog>
+</main><script type="module" src="/mobile/app.mjs"></script></body></html>

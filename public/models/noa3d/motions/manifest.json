@@ -1,0 +1,58 @@
+{
+  "source": "Microsoft Rocketbox",
+  "sourceCommit": "0943055db6ec570bcef9f2c8b41c9e5467c808f9",
+  "conversion": "Hanami VRMA assets only; no Hanami application code included",
+  "conversionCommit": "6787685c8d40e4e79bffbb0d389b478f32ef88d6",
+  "retrievedAt": "2026-09-28T05:54:07.995Z",
+  "motions": {
+    "idle": {
+      "file": "rb-idle.vrma",
+      "license": "MIT",
+      "url": "https://raw.githubusercontent.com/Undi95/Hanami/6787685c8d40e4e79bffbb0d389b478f32ef88d6/vrma/rb-idle.vrma",
+      "bytes": 357020,
+      "sha256": "f698f6ea045533ab7475f7d512ea76c904f4a88b6e3645256f70ae532dd79b40"
+    },
+    "nod": {
+      "file": "rb-nod.vrma",
+      "license": "MIT",
+      "url": "https://raw.githubusercontent.com/Undi95/Hanami/6787685c8d40e4e79bffbb0d389b478f32ef88d6/vrma/rb-nod.vrma",
+      "bytes": 107528,
+      "sha256": "1c73e142305ae33e356a185145c3bf482d8fcda5057f632e60dd5ecda3b8c726"
+    },
+    "wave": {
+      "file": "rb-wave.vrma",
+      "license": "MIT",
+      "url": "https://raw.githubusercontent.com/Undi95/Hanami/6787685c8d40e4e79bffbb0d389b478f32ef88d6/vrma/rb-wave.vrma",
+      "bytes": 218660,
+      "sha256": "8bd33d84e90c0243987924c2f27d826f0b3343cfa8d1607a4e2f0bb9ce8af643"
+    },
+    "think": {
+      "file": "rb-listen-2.vrma",
+      "license": "MIT",
+      "url": "https://raw.githubusercontent.com/Undi95/Hanami/6787685c8d40e4e79bffbb0d389b478f32ef88d6/vrma/rb-listen-2.vrma",
+      "bytes": 222796,
+      "sha256": "3a7c6bc77fe9531ae960b9446b60ace26e5b1036768c1c93f040a90b22329eb7"
+    },
+    "surprise": {
+      "file": "rb-shrug.vrma",
+      "license": "MIT",
+      "url": "https://raw.githubusercontent.com/Undi95/Hanami/6787685c8d40e4e79bffbb0d389b478f32ef88d6/vrma/rb-shrug.vrma",
+      "bytes": 101228,
+      "sha256": "40db0f7c6d61200136c3a48f77d8cede1557cc62e468f5aca46cbd80e1da5f47"
+    },
+    "explain": {
+      "file": "rb-idle-talking.vrma",
+      "license": "MIT",
+      "url": "https://raw.githubusercontent.com/Undi95/Hanami/6787685c8d40e4e79bffbb0d389b478f32ef88d6/vrma/rb-idle-talking.vrma",
+      "bytes": 294652,
+      "sha256": "3b1c1155dfac93d4d4d3a44deecc17420cd191cbec9b68e795f19bc6d05e0e6e"
+    },
+    "beckon": {
+      "file": "noa-beckon.vrma",
+      "license": "MIT",
+      "source": "Authored for Noa in this repository: scripts/build-noa-beckon-motion.mjs (not derived from Rocketbox or Hanami)",
+      "bytes": 6696,
+      "sha256": "08e4f88e7bffc7255006efb70fa7f862540e0cc08f560cac0fbf25a01d171469"
+    }
+  }
+}

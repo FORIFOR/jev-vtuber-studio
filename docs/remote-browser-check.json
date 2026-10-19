@@ -1,0 +1,7 @@
+{
+  "test": "Normal browser navigation only; no managed policy changes or transport replacements",
+  "externalServices": false,
+  "healthHTTP": 200,
+  "navigation": "blocked_or_failed",
+  "error": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://127.0.0.1:9881/setup#admin=[test-token-redacted]"
+}

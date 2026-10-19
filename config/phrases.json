@@ -1,0 +1,14 @@
+[
+  { "text": "ありがとう！", "presets": ["happy", "neutral", "nod", "embarrassed"] },
+  { "text": "こんばんは！", "presets": ["happy", "neutral"] },
+  { "text": "ナイス！", "presets": ["happy", "excited"] },
+  { "text": "えっ！？", "presets": ["surprised", "shock"] },
+  { "text": "やったー！", "presets": ["happy", "excited"] },
+  { "text": "ちょっと待って！", "presets": ["surprised", "shock", "troubled"] },
+  { "text": "なるほど〜", "presets": ["nod", "thinking"] },
+  { "text": "うんうん", "presets": ["nod"] },
+  { "text": "本当に？", "presets": ["surprised", "thinking"] },
+  { "text": "えっ、", "presets": ["surprised", "shock"] },
+  { "text": "あっ、", "presets": ["surprised"] },
+  { "text": "よかったぁ〜！", "presets": ["happy"] }
+]

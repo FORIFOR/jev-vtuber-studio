@@ -1,0 +1,6 @@
+graph TD
+    source["ソース\nsrc/store.mjs"]
+    n-node-fs-a15b7d["node:fs\n外部・別名・未解決"]
+    source -->|"字句抽出: import／export"| n-node-fs-a15b7d
+    n-node-path-78811c["node:path\n外部・別名・未解決"]
+    source -->|"字句抽出: import／export"| n-node-path-78811c

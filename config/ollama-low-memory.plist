@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EnvironmentVariables</key>
+	<dict>
+		<key>LLAMA_ARG_CACHE_RAM</key>
+		<string>0</string>
+		<key>LLAMA_ARG_CTX_CHECKPOINTS</key>
+		<string>2</string>
+		<key>OLLAMA_HOST</key>
+		<string>127.0.0.1:11434</string>
+	</dict>
+	<key>KeepAlive</key>
+	<true/>
+	<key>Label</key>
+	<string>com.noa.ollama-low-memory</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Applications/Ollama.app/Contents/Resources/ollama</string>
+		<string>serve</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+	<key>ThrottleInterval</key>
+	<integer>30</integer>
+</dict>
+</plist>

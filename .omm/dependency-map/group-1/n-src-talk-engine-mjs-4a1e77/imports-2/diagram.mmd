@@ -1,0 +1,8 @@
+graph TD
+    source["ソース\nsrc/talk-engine.mjs"]
+    n-blocks-show-mjs-56ec3d["./blocks-show.mjs\nsrc/blocks-show.mjs"]
+    source -->|"字句抽出: import／export"| n-blocks-show-mjs-56ec3d
+    n-speech-director-mjs-efaa27["./speech-director.mjs\nsrc/speech-director.mjs"]
+    source -->|"字句抽出: import／export"| n-speech-director-mjs-efaa27
+    n-audio-bus-mjs-d297e0["./audio-bus.mjs\nsrc/audio-bus.mjs"]
+    source -->|"字句抽出: import／export"| n-audio-bus-mjs-d297e0

@@ -1,0 +1,16 @@
+const $=id=>document.getElementById(id),f=new URLSearchParams(location.hash.slice(1));let admin=f.get('admin')||sessionStorage.getItem('jvs-admin')||'';
+if(f.has('admin')){sessionStorage.setItem('jvs-admin',admin);history.replaceState(null,'','/');}
+const n=(v,d=1)=>typeof v==='number'&&Number.isFinite(v)?v.toFixed(d):'未計測';
+async function api(path,post=false){const r=await fetch(path,{method:post?'POST':'GET',headers:{Authorization:`Bearer ${admin}`,...(post?{'Content-Type':'application/json'}:{})},...(post?{body:'{}'}:{})});const d=await r.json();if(!r.ok)throw Error(d.error);return d;}
+function chart(rows){const c=$('chart'),x=c.getContext('2d'),end=Date.now(),start=end-600000;x.clearRect(0,0,c.width,c.height);x.font='12px sans-serif';for(let y=0;y<=60;y+=15){const py=195-y/60*175;x.strokeStyle='#394059';x.beginPath();x.moveTo(36,py);x.lineTo(990,py);x.stroke();x.fillStyle='#abb1c6';x.fillText(String(y),4,py+4);}
+for(const [color,key] of [['#bc9dff',r=>r.game?.changedFps],['#64e1e1',r=>r.fps]]){x.strokeStyle=color;x.lineWidth=2;x.beginPath();let prev=0;for(const r of rows.filter(r=>r.at>=start)){const v=key(r);if(typeof v!=='number'){prev=0;continue;}const px=36+(r.at-start)/600000*954,py=195-Math.min(65,v)/60*175;if(!prev||r.at-prev>8000)x.moveTo(px,py);else x.lineTo(px,py);prev=r.at;}x.stroke();}}
+let busy=false;
+async function update(){if(busy)return;busy=true;try{const d=await api('/api/status'),s=d.latest;if(!s)throw Error('初回計測待ち');const stale=Date.now()-s.at>8000;const labels={combat:'プレイ中',levelup:'レベルアップ選択中',chest:'宝箱',gameover:'ゲームオーバー',menu:'メニュー',unknown:'ゲーム状態未確認',between:'ゲーム間の休憩',lobby:'冒頭の雑談',starting:'ゲーム準備中',stopped:'番組停止中'};$('status').textContent=stale?'更新が止まっています。現在の状態は未確認です。':s.status==='ok'?'直近の計測では大きなコマ落ちを検出していません':s.status==='partial'?'一部未計測です':'確認が必要な項目があります';$('status').className=stale||s.status!=='ok'?'warn':'ok';$('updated').textContent=`最終更新 ${new Date(s.at).toLocaleTimeString('ja-JP')} ／ ${labels[s.phase]||s.phase} ／ ${s.streaming?'配信中':'OBS送信停止'}`;
+$('game').textContent=`${n(s.game?.changedFps)} fps`;$('game-sub').textContent=`更新間隔 p95 ${n(s.game?.changedP95Ms)} ms ／ 100ms超 ${n(s.game?.changedGaps100ms,0)} 回 / 約2秒`;
+$('obs').textContent=`${n(s.fps)} / ${n(s.targetFps,0)} fps`;$('render').textContent=`描画落ち ${n(s.renderDropPct,2)}% ／ 描画時間 ${n(s.renderMs)} ms`;
+$('drop').textContent=`${n(s.encodeDropPct,2)}% / ${n(s.networkDropPct,2)}%`;$('network').textContent=`エンコード落ち / 回線落ち（直近差分） · ${n(s.bitrateKbps,0)} kbps`;
+$('control').textContent=`${n(s.control?.jevP95Ms,0)} ms`;$('control-sub').textContent=`Jev応答 p95 ／ 500ms超の操作間隔 ${n(s.control?.leaseGaps,0)} 回（最大30秒分）`;
+$('issues').replaceChildren(...(s.issues.length?s.issues:[{text:'数値が安定していても、視聴端末側の途切れまでは判定できません。'}]).map(i=>{const li=document.createElement('li');li.textContent=i.text;return li;}));$('repair').disabled=stale||d.repairCooldownMs>0;chart(d.history||[]);
+}catch(e){$('status').textContent=e.message||'計測器との接続が切れています。';$('status').className='warn';$('repair').disabled=true;}finally{busy=false;}}
+$('repair').onclick=async()=>{$('repair').disabled=true;try{$('action').textContent=(await api('/api/refresh-capture',true)).message;}catch(e){$('action').textContent=e.message;}await update();};
+update();setInterval(update,2000);

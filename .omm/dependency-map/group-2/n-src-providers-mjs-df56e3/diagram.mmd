@@ -1,0 +1,6 @@
+graph TD
+    source["ソース\nsrc/providers.mjs"]
+    n-director-mjs-7bc8b4["./director.mjs\nsrc/director.mjs"]
+    source -->|"字句抽出: import／export"| n-director-mjs-7bc8b4
+    n-util-mjs-c035dc["./util.mjs\nsrc/util.mjs"]
+    source -->|"字句抽出: import／export"| n-util-mjs-c035dc

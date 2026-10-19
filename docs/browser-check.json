@@ -1,0 +1,27 @@
+{
+  "transport": "isolated DOM with actual loopback HTTP/SSE bridge; browser navigation unavailable by managed policy",
+  "browser": "144.0.7559.96",
+  "checks": {
+    "autonomous_demo_started": true,
+    "speech_started_ack": true,
+    "speech_completed": "4 発話",
+    "talk_profile": true,
+    "game_hidden": true,
+    "setup_save": true,
+    "setup_mobile_no_overflow": true,
+    "emergency_stop": true,
+    "explicit_reset": true,
+    "mobile_no_horizontal_overflow": true,
+    "page_errors": []
+  },
+  "desktop_viewport": [
+    1440,
+    1100
+  ],
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "real_external_services_tested": false,
+  "normal_url_navigation": "blocked by managed Chromium policy (not modified)"
+}

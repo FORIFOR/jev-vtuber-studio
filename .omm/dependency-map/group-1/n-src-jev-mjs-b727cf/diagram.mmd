@@ -1,0 +1,8 @@
+graph TD
+    source["ソース\nsrc/jev.mjs"]
+    n-util-mjs-c035dc["./util.mjs\nsrc/util.mjs"]
+    source -->|"字句抽出: import／export"| n-util-mjs-c035dc
+    n-public-avatar-rig-mjs-66f0d0["../public/avatar-rig.mjs\npublic/avatar-rig.mjs"]
+    source -->|"字句抽出: import／export"| n-public-avatar-rig-mjs-66f0d0
+    n-speech-director-mjs-efaa27["./speech-director.mjs\nsrc/speech-director.mjs"]
+    source -->|"字句抽出: import／export"| n-speech-director-mjs-efaa27

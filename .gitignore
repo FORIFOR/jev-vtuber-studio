@@ -1,0 +1,24 @@
+# Runtime credentials, tokens, recordings and local state: never commit.
+data/
+.env
+.env.*
+!.env.example
+.npmrc
+*.pem
+*.key
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+Thumbs.db
+
+# Local tooling caches
+__pycache__/
+*.pyc
+.claude/
+
+# One-off local diagnostic scripts
+scratch/
+# A game controller's runtime files (handoff mode/ack) when GAME_DIR is this folder
+.local/

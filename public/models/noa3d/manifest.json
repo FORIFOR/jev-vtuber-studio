@@ -1,0 +1,10 @@
+{
+  "name": "Noa",
+  "version": "4.92.0",
+  "format": "VRM0",
+  "file": "Noa.vrm",
+  "bytes": 77008920,
+  "sha256": "4bc7d25e0cb0d218fcc6b8eb4db8becb5ab43fe54c754adfccc0eb229443e2ef",
+  "license": "AVATAR-LICENSE.md",
+  "motions": "motions/manifest.json"
+}

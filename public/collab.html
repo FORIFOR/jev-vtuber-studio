@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>声を聞く / Jev VTuber Studio</title>
+  <link rel="stylesheet" href="/switch.css">
+  <style>
+    .collab-card{max-width:720px;margin:24px auto;padding:20px 24px;border-radius:14px;background:#ffffff0f;border:1px solid #ffffff22}
+    .collab-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
+    .collab-meter{flex:1;min-width:200px;height:14px;border-radius:7px;background:#8884;overflow:hidden;position:relative}
+    .collab-meter i{position:absolute;left:0;top:0;bottom:0;width:0;background:#5fd3a4}
+    .collab-meter b{position:absolute;top:-3px;bottom:-3px;width:2px;background:#ffcf6e}
+    #collab-state,#human-state{font-weight:700}
+    #collab-log,#human-log{list-style:none;padding:0;margin:12px 0 0;font-size:14px;line-height:1.5}
+    #collab-log li,#human-log li{padding:6px 0;border-top:1px solid #8882}
+    #collab-log small,#human-log small{opacity:.65;margin-right:8px}
+  </style>
+</head>
+<body>
+<main class="switch-shell">
+  <header class="topbar"><a class="brand" href="/">Jev <span>VTUBER STUDIO</span></a><a href="/">Studioへ戻る <span aria-hidden="true">↗</span></a></header>
+  <section class="collab-card">
+    <h1>通話相手の声を聞く</h1>
+    <p class="helper">Discord の出力をつないだ入力（例：BlackHole 16ch）を選んで「聞き始める」を押します。声の区切りごとにローカルの音声認識（whisper-server）へ送り、ノアが返事します。このタブは配信中ずっと開いたままにしてください。手順は docs/COLLAB.md。</p>
+    <div class="collab-row"><label for="collab-device">入力</label><select id="collab-device"><option value="">（マイクの許可後に選べます）</option></select><button id="collab-start">聞き始める</button><button id="collab-stop" class="secondary" disabled>止める</button></div>
+    <div class="collab-row"><span>音量</span><div class="collab-meter"><i id="collab-level"></i><b id="collab-mark"></b></div><label>声とみなす大きさ <input id="collab-threshold" type="range" min="0.003" max="0.08" step="0.001" value="0.015"></label></div>
+    <p id="collab-warn" class="helper" style="color:#c0392b" hidden>BlackHole 2ch はノアの声を Discord に送る側です。相手の声は BlackHole 16ch（Discord の出力先）を選んでください。</p>
+    <p>状態：<span id="collab-state">停止中</span></p>
+    <ul id="collab-log"></ul>
+  </section>
+  <section class="collab-card">
+    <h1>中の人のマイク</h1>
+    <p class="helper">「人間がノアとして話す時の声」が「コハクで読み直し」の時に使います。実際のマイクを選んで「聞き始める」を押しておくと、人間が話す番（Studio の F6）の間だけ、話した言葉がノアの声（コハク）で流れます。AI が話す番の間は文字にもしません。手順は docs/HUMAN_VOICE.md。</p>
+    <div class="collab-row"><label for="human-device">入力</label><select id="human-device"><option value="">（マイクの許可後に選べます）</option></select><button id="human-start">聞き始める</button><button id="human-stop" class="secondary" disabled>止める</button></div>
+    <div class="collab-row"><span>音量</span><div class="collab-meter"><i id="human-level"></i><b id="human-mark"></b></div><label>声とみなす大きさ <input id="human-threshold" type="range" min="0.003" max="0.08" step="0.001" value="0.015"></label></div>
+    <p id="human-warn" class="helper" style="color:#c0392b" hidden>BlackHole はノアや通話相手の音です。中の人の実際のマイクを選んでください。</p>
+    <p>状態：<span id="human-state">停止中</span></p>
+    <ul id="human-log" class="collab-log"></ul>
+  </section>
+</main>
+<script type="module" src="/collab.mjs"></script>
+</body>
+</html>

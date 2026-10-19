@@ -1,0 +1,19 @@
+確認したパス: `scripts`。配下の登録ファイルは17件。
+
+- `scripts/analyze-log.mjs`（一覧のみ）
+- `scripts/benchmark.mjs`（一覧のみ）
+- `scripts/browser-render-check.py`（一覧のみ）
+- `scripts/build-noa-layers.py`（一覧のみ）
+- `scripts/check.mjs`（一覧のみ）
+- `scripts/cli.mjs`（一覧のみ）
+- `scripts/doctor.mjs`（一覧のみ）
+- `scripts/episode-brief.mjs`（一覧のみ）
+- `scripts/live-player.mjs`（一覧のみ）
+- `scripts/package-release.mjs`（一覧のみ）
+- `scripts/remote-setup.mjs`（一覧のみ）
+- `scripts/supertonic-local.py`（一覧のみ）
+- `scripts/supervised.mjs`（一覧のみ）
+- `scripts/voice-benchmark.mjs`（一覧のみ）
+- `scripts/voice-design.mjs`（一覧のみ）
+- `scripts/voice-library.mjs`（一覧のみ）
+- `scripts/youtube-auth.mjs`（一覧のみ）

@@ -1,0 +1,24 @@
+実在パス: `public/models`。22ファイル。
+
+- `public/models/noa/Blush.png`
+- `public/models/noa/Body.png`
+- `public/models/noa/BrowL.png`
+- `public/models/noa/BrowR.png`
+- `public/models/noa/EyeClosedL.png`
+- `public/models/noa/EyeClosedR.png`
+- `public/models/noa/EyeIrisL.png`
+- `public/models/noa/EyeIrisR.png`
+- `public/models/noa/EyeLashL.png`
+- `public/models/noa/EyeLashR.png`
+- `public/models/noa/EyeWhiteL.png`
+- `public/models/noa/EyeWhiteR.png`
+- `public/models/noa/Face.png`
+- `public/models/noa/HairSideL.png`
+- `public/models/noa/HairSideR.png`
+- `public/models/noa/HeadBase.png`
+- `public/models/noa/Microphone.png`
+- `public/models/noa/MouthClosed.png`
+- `public/models/noa/MouthO.png`
+- `public/models/noa/MouthOpen.png`
+- `public/models/noa/MouthWave.png`
+- `public/models/noa/model.json`

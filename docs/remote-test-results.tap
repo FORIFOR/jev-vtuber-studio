@@ -1,0 +1,140 @@
+
+> jev-vtuber-studio@0.2.0-rc.3 test:remote
+> node --test test/remote.test.mjs test/remote-flow.test.mjs
+
+TAP version 13
+# Subtest: local setup → real HTTP rehearsal → OBS-role WAV ACK → arm → private gateway start/stop
+ok 1 - local setup → real HTTP rehearsal → OBS-role WAV ACK → arm → private gateway start/stop
+  ---
+  duration_ms: 121.795095
+  type: 'test'
+  ...
+# Subtest: remote setup CLI is explicit, private, restart-required, and side-effect free for --help
+ok 2 - remote setup CLI is explicit, private, restart-required, and side-effect free for --help
+  ---
+  duration_ms: 347.307266
+  type: 'test'
+  ...
+# Subtest: remote is disabled without explicit options; only exact Tailscale HTTPS and allowlist accepted
+ok 3 - remote is disabled without explicit options; only exact Tailscale HTTPS and allowlist accepted
+  ---
+  duration_ms: 1.286273
+  type: 'test'
+  ...
+# Subtest: arm requires live rehearsal, OBS playback proof, and explicit local consent
+ok 4 - arm requires live rehearsal, OBS playback proof, and explicit local consent
+  ---
+  duration_ms: 1.795047
+  type: 'test'
+  ...
+# Subtest: arming and preflight never start a stream; permission expires after eight hours
+ok 5 - arming and preflight never start a stream; permission expires after eight hours
+  ---
+  duration_ms: 2.114549
+  type: 'test'
+  ...
+# Subtest: destination or provider changes invalidate start permission
+ok 6 - destination or provider changes invalidate start permission
+  ---
+  duration_ms: 0.770189
+  type: 'test'
+  ...
+# Subtest: remote preflight refuses muted, hidden, zero-volume or changed OBS sources
+ok 7 - remote preflight refuses muted, hidden, zero-volume or changed OBS sources
+  ---
+  duration_ms: 2.233595
+  type: 'test'
+  ...
+# Subtest: start is explicit, idempotent, and waits for observed OBS output before runtime starts
+ok 8 - start is explicit, idempotent, and waits for observed OBS output before runtime starts
+  ---
+  duration_ms: 1.205534
+  type: 'test'
+  ...
+# Subtest: stop preempts a delayed preflight and prevents any later StartStream
+ok 9 - stop preempts a delayed preflight and prevents any later StartStream
+  ---
+  duration_ms: 7.674016
+  type: 'test'
+  ...
+# Subtest: stop also cleans up when OBS start acknowledgment arrives late
+ok 10 - stop also cleans up when OBS start acknowledgment arrives late
+  ---
+  duration_ms: 6.685593
+  type: 'test'
+  ...
+# Subtest: panic revokes authorization and never resets the emergency latch remotely
+ok 11 - panic revokes authorization and never resets the emergency latch remotely
+  ---
+  duration_ms: 1.139877
+  type: 'test'
+  ...
+# Subtest: network failure does not report a verified stop
+ok 12 - network failure does not report a verified stop
+  ---
+  duration_ms: 0.785202
+  type: 'test'
+  ...
+# Subtest: a stream started outside Studio is not stopped or claimed
+ok 13 - a stream started outside Studio is not stopped or claimed
+  ---
+  duration_ms: 0.544505
+  type: 'test'
+  ...
+# Subtest: real HTTP gateway rejects missing identity, wrong user, and wrong Host
+ok 14 - real HTTP gateway rejects missing identity, wrong user, and wrong Host
+  ---
+  duration_ms: 32.825795
+  type: 'test'
+  ...
+# Subtest: gateway grants a secure user-bound session but refuses missing CSRF or foreign Origin
+ok 15 - gateway grants a secure user-bound session but refuses missing CSRF or foreign Origin
+  ---
+  duration_ms: 8.43383
+  type: 'test'
+  ...
+# Subtest: gateway has no settings, shell, render-claim, credentials, or GET start endpoint
+ok 16 - gateway has no settings, shell, render-claim, credentials, or GET start endpoint
+  ---
+  duration_ms: 8.005837
+  type: 'test'
+  ...
+# Subtest: phone UI contains no renderer, speech generation, service worker, or secret storage
+ok 17 - phone UI contains no renderer, speech generation, service worker, or secret storage
+  ---
+  duration_ms: 0.424058
+  type: 'test'
+  ...
+# Subtest: main local app remains inaccessible via a reverse proxy Host; remote is opt-in
+ok 18 - main local app remains inaccessible via a reverse proxy Host; remote is opt-in
+  ---
+  duration_ms: 8.506838
+  type: 'test'
+  ...
+# Subtest: StopStream acknowledgment is not confused with observed output termination
+ok 19 - StopStream acknowledgment is not confused with observed output termination
+  ---
+  duration_ms: 0.917117
+  type: 'test'
+  ...
+# Subtest: own output staying active is STOP_UNCONFIRMED, never an external-stream claim
+ok 20 - own output staying active is STOP_UNCONFIRMED, never an external-stream claim
+  ---
+  duration_ms: 1.214477
+  type: 'test'
+  ...
+# Subtest: property order changes in OBS responses do not invalidate the verified destination
+ok 21 - property order changes in OBS responses do not invalidate the verified destination
+  ---
+  duration_ms: 0.591876
+  type: 'test'
+  ...
+1..21
+# tests 21
+# suites 0
+# pass 21
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 555.115782
