@@ -150,7 +150,7 @@ test('settings: game sound, its level, the controller folder and the cost cap ar
     assert.equal(r.values.GAME_AUDIO, true); assert.equal(r.values.GAME_AUDIO_DB, -12);
     const v = setup(t, { SHOW_PROFILE: 'talk', SHOW_PROGRAMME: 'noa-vampire' }); // the controller folder matters to a Jev-played game
     saveSettings(v, { values: { GAME_DIR: '/Users/me/jev-vampire-survivors', GAME_MAX_COST_USD: '2.5' } });
-    assert.equal(v.gameDir, '/Users/me/jev-vampire-survivors'); assert.equal(v.gameLogDir, '/Users/me/jev-vampire-survivors/runs'); assert.equal(v.gameMaxCostUsd, 2.5);
+    assert.equal(v.gameDir, '/Users/me/jev-vampire-survivors'); assert.equal(v.gameLogDir, join('/Users/me/jev-vampire-survivors', 'runs')); assert.equal(v.gameMaxCostUsd, 2.5);
     assert.equal(publicSettings(v).values.GAME_DIR, '/Users/me/jev-vampire-survivors');
     assert.equal(r.programmes.find(p => p.id === 'noa-smash').game.capture, 'switch');
     saveSettings(c, { values: { GAME_AUDIO: false, GAME_AUDIO_DB: '' } }); assert.equal(c.gameAudio, false); assert.equal(c.gameAudioDb, null);

@@ -40,7 +40,7 @@ test('games registry: each folder under games/ is a game; programmes name one; b
     writeFileSync(join(dir, 'star-racer', 'game.json'), JSON.stringify({ id: 'star-racer', title: 'x' }));
     assert.throws(() => loadGame('star-racer', dir), /"show" is required/);
     assert.deepEqual(controllerPaths(v, { VAMPIRE_RUNS_DIR: '/a/jvs/runs' }), { dir: '/a/jvs', logDir: '/a/jvs/runs' });
-    assert.deepEqual(controllerPaths(v, { GAME_DIR: '/b/jvs' }), { dir: '/b/jvs', logDir: '/b/jvs/runs' });
+    assert.deepEqual(controllerPaths(v, { GAME_DIR: '/b/jvs' }), { dir: '/b/jvs', logDir: join('/b/jvs', 'runs') }); // the platform's separator (Windows CI)
 });
 
 test('a new game plugs in: its controller command, progress lines and limits come from its manifest', t => {

@@ -1,2 +1,8 @@
+# Checked out with LF everywhere (Windows too): hashed and size-checked files (e.g. the VRM bundle) stay byte-identical.
+* text=auto eol=lf
+*.png binary
+*.vrm binary
+*.vrma binary
+*.wav binary
 # Preserve upstream GLSL string whitespace in the generated browser bundle.
 public/noa-vrm-avatar.mjs linguist-generated=true -whitespace

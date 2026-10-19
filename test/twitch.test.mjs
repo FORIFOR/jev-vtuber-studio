@@ -40,7 +40,7 @@ test('refresh rotation saves new private token and validates intended identity',
     } });
     assert.equal((await a.credentials()).user_id, '1');
     assert.equal(JSON.parse(readFileSync(c.twitchAuthFile)).refresh_token, 'new-refresh');
-    assert.equal(statSync(c.twitchAuthFile).mode & 0o777, 0o600);
+    if (process.platform !== 'win32') assert.equal(statSync(c.twitchAuthFile).mode & 0o777, 0o600); // Windows has no POSIX modes
 });
 test('socket subscribes to own chat and abort closes connection', async t => {
     const c = setup(t); let socket, body;
