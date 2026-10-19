@@ -78,7 +78,7 @@ test('the committed VRM bundle matches its build record and every recorded proje
     assert.ok(record.sources['browser/avatar-vrm/controls.mjs']);
     assert.ok(record.sources['public/avatar-rig.mjs']);
     for (const [path, expected] of Object.entries(record.sources)) {
-        assert.equal(relative(root, resolve(root, path)), path, 'build record uses contained, relative paths');
+        assert.equal(relative(root, resolve(root, path)).replaceAll('\\', '/'), path, 'build record uses contained, relative paths'); // Windows separators
         assert.ok(!path.includes('node_modules'));
         assert.equal(hash(bytes(path)), expected, `${path} must be rebuilt after changes`);
     }
