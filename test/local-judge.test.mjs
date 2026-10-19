@@ -101,8 +101,13 @@ test('no model, or a Gemini conversation model without a local judge, throws bef
 });
 
 test('the judge timeout and the caller signal abort the request', async () => {
-    const hang = (_u, o) => new Promise((_, reject) => o.signal.addEventListener('abort', () => reject(o.signal.reason), { once: true }));
-    await assert.rejects(localJudge({ ...COMPATIBLE, judgeTimeoutMs: 20 }, STATE, Q, { fetchFn: hang }), e => e.name === 'TimeoutError');
-    const ac = new AbortController(); setTimeout(() => ac.abort(), 10);
-    await assert.rejects(localJudge(COMPATIBLE, STATE, Q, { fetchFn: hang, signal: ac.signal }), e => e.name === 'AbortError');
+    // AbortSignal.timeout's timer does not keep Node alive: with nothing else pending (CI on Linux) the run ended before
+    // it fired (cancelledByParent). The server keeps the loop alive in production; this test holds it for its duration.
+    const keepAlive = setInterval(() => { }, 1000);
+    try {
+        const hang = (_u, o) => new Promise((_, reject) => o.signal.addEventListener('abort', () => reject(o.signal.reason), { once: true }));
+        await assert.rejects(localJudge({ ...COMPATIBLE, judgeTimeoutMs: 20 }, STATE, Q, { fetchFn: hang }), e => e.name === 'TimeoutError');
+        const ac = new AbortController(); setTimeout(() => ac.abort(), 10);
+        await assert.rejects(localJudge(COMPATIBLE, STATE, Q, { fetchFn: hang, signal: ac.signal }), e => e.name === 'AbortError');
+    } finally { clearInterval(keepAlive); }
 });
